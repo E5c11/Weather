@@ -1,6 +1,6 @@
-package com.demo.weather
+package com.demo.weather.weather
 
-import com.demo.weather.data.FiveDayWeather
+import com.demo.weather.weather.data.FiveDayWeather
 
 class RemoteWeatherDataSource: WeatherDataSource {
     override suspend fun getFiveDayWeather(): FiveDayWeather {
