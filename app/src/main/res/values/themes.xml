@@ -14,6 +14,12 @@
         <item name="buttonStyle">@style/DefaultButtonStyle</item>
     </style>
 
+    <style name="Theme.Splash" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/blue_01</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/openweather_logo</item>
+        <item name="postSplashScreenTheme">@style/Theme.Weather</item>
+    </style>
+
     <style name="DefaultTextViewStyle" parent="android:Widget.TextView">
         <item name="android:fontFamily">@font/source_sans_pro_regular</item>
     </style>

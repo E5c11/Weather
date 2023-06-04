@@ -29,12 +29,16 @@
         layout="@layout/hourly_component"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_medium"
+        android:layout_marginEnd="@dimen/spacing_medium"
         app:layout_constraintTop_toBottomOf="@id/five_day_component"/>
 
     <include
         android:id="@+id/map_component"
         layout="@layout/map_component"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_medium"
+        android:layout_marginEnd="@dimen/spacing_medium"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

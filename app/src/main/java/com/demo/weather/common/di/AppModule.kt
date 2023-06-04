@@ -23,5 +23,10 @@ object AppModule {
 
     @Provides
     @Singleton
+    fun providesHttpLoggingInterceptor(): HttpLoggingInterceptor =
+        HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
+
+    @Provides
+    @Singleton
     fun providesDispatcherProvider() = DispatcherProvider()
 }

@@ -1,9 +1,10 @@
 package com.demo.weather.weather.component
 
-import android.location.Location
+import android.util.Log
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelStoreOwner
+import com.demo.weather.common.helper.Resource
 import com.demo.weather.common.helper.collectIn
 import com.demo.weather.databinding.FiveDayComponentBinding
 import com.demo.weather.weather.data.MainWeather
@@ -11,6 +12,7 @@ import com.demo.weather.weather.viewmodel.FiveDayViewModel
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
+import com.demo.weather.common.helper.fadeTo
 
 class FiveDayComponent @AssistedInject constructor(
     @Assisted private val lifecycleOwner: LifecycleOwner,
@@ -25,8 +27,10 @@ class FiveDayComponent @AssistedInject constructor(
     private val adapter = FiveDayListAdapter()
 
     init {
-        viewModel.getWeather(18.487599.toLong(), (-33.958240).toLong())
-        viewModel.fiveDayWeatherFlow.collectIn(lifecycleOwner) { resource ->
+        binding.listview.adapter = adapter
+        viewModel.getWeather(18.487599.toLong(), (-33.958240).toLong()).collectIn(lifecycleOwner) { resource ->
+            binding.listview.fadeTo(Resource.Status.LOADING != resource.status)
+            Log.d("myT", "component: $resource")
             resource.data?.let {
                 adapter.submitList(it.list)
                 updateCurrentWeather(it.list[0].mainWeather)
@@ -43,7 +47,8 @@ class FiveDayComponent @AssistedInject constructor(
         fun create(
             lifecycleOwner: LifecycleOwner,
             storeOwner: ViewModelStoreOwner,
-            binding: FiveDayComponentBinding
+            binding: FiveDayComponentBinding,
+            updateCurrentWeather: (MainWeather) -> Unit
         ): FiveDayComponent
     }
 }

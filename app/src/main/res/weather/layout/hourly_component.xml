@@ -4,6 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     app:cardCornerRadius="@dimen/card_radius"
+    android:alpha="0.7"
     android:layout_width="match_parent"
     android:layout_height="@dimen/card_width"
     android:background="@color/text_disabled_dark">
@@ -11,7 +12,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/spacing_medium">
+        android:padding="@dimen/spacing_medium"
+        android:background="@drawable/simple_gradient">
 
         <TextView
             android:id="@+id/title"

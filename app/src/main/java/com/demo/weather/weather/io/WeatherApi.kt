@@ -4,14 +4,15 @@ import com.demo.weather.weather.data.FiveDayWeather
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface WeatherApi {
 
-    @GET("forecast?lat={lat}&lon={lon}&appid={apiKey}")
+    @GET("forecast")
     suspend fun getFiveDay(
-        @Path("lat") lat: String,
-        @Path("lon") lon: String,
-        @Path("apiKey") apiKey: String
+        @Query("lat") lat: String,
+        @Query("lon") lon: String,
+        @Query("apiKey") apiKey: String
     ): Response<FiveDayWeather>
 
 }
