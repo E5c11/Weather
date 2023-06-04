@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="icon_description">Current Condition</string>
+
+    <string name="five_day_forecast_title">5-Day Forecast</string>
+    <string name="hourly_forecast_title">Hourly Forecast</string>
+</resources>

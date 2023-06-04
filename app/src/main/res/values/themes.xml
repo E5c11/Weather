@@ -10,10 +10,19 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimary</item>
         <!-- Customize your theme here. -->
-        <item name="android:fontFamily">sans-pro</item>
+        <item name="android:textViewStyle">@style/DefaultTextViewStyle</item>
+        <item name="buttonStyle">@style/DefaultButtonStyle</item>
     </style>
 
-    <style name="TextViewDefaultStyle" parent="android:Widget.TextView">
-        <item name="android:fontFamily">sans-serif-light</item>
+    <style name="DefaultTextViewStyle" parent="android:Widget.TextView">
+        <item name="android:fontFamily">@font/source_sans_pro_regular</item>
+    </style>
+
+    <style name="CardHeaderTextViewStyle" parent="android:Widget.TextView">
+        <item name="android:fontFamily">@font/source_sans_pro_semi_bold</item>
+    </style>
+
+    <style name="DefaultButtonStyle" parent="android:Widget.Holo.Button">
+        <item name="android:fontFamily">@font/source_sans_pro_semi_bold</item>
     </style>
 </resources>

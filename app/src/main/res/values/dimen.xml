@@ -12,6 +12,8 @@
     <dimen name="spacing_xlarge">28dp</dimen>
     <dimen name="spacing_macro">102dp</dimen>
 
+    <dimen name="divider_height">1dp</dimen>
+
     <dimen name="card_width">328dp</dimen>
     <dimen name="card_radius">28dp</dimen>
 
