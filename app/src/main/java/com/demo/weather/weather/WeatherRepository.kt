@@ -14,9 +14,7 @@ class WeatherRepository(
     fun fetch(lat: Long, lng: Long): FiveDayFlow = flow {
         emit(Resource.loading(LOADING))
         try {
-            Log.d("myT", "fetch: before")
             val result = dataSource.getFiveDayWeather(lat, lng)
-            Log.d("myT", "fetch: $result")
             emit(Resource.success(result))
         } catch (e: Exception) {
             emit(Resource.error(e))

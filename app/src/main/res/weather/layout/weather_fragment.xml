@@ -8,12 +8,19 @@
     android:background="@drawable/simple_gradient"
     tools:context="com.demo.weather.weather.ui.WeatherFragment">
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/top_guideLine"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="@dimen/spacing_macro"/>
+
     <include
         android:id="@+id/current_weather_component"
         layout="@layout/current_weather_component"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@id/top_guideLine"/>
 
     <include
         android:id="@+id/five_day_component"

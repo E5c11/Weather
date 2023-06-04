@@ -39,6 +39,7 @@ class LocalLocationDataSource @Inject constructor(
             override fun onLocationResult(locationResult: LocationResult) {
                 for (location in locationResult.locations) {
                     trySend(location)
+                    channel.close()
                 }
             }
         }

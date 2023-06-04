@@ -1,45 +1,53 @@
 package com.demo.weather.weather.component
 
-import android.util.Log
+import android.location.Location
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelStoreOwner
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.demo.weather.common.helper.Resource
 import com.demo.weather.common.helper.collectIn
 import com.demo.weather.databinding.FiveDayComponentBinding
-import com.demo.weather.weather.data.MainWeather
 import com.demo.weather.weather.viewmodel.FiveDayViewModel
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
 import com.demo.weather.common.helper.fadeTo
+import com.demo.weather.weather.data.FiveDayWeather
 
 class FiveDayComponent @AssistedInject constructor(
     @Assisted private val lifecycleOwner: LifecycleOwner,
     @Assisted private val storeOwner: ViewModelStoreOwner,
     @Assisted private val binding: FiveDayComponentBinding,
-    @Assisted private val updateCurrentWeather: (MainWeather) -> Unit
+    @Assisted private val updateCurrentWeather: (FiveDayWeather) -> Unit
 ) {
 
     private val viewModel: FiveDayViewModel =
         ViewModelProvider(storeOwner)[FiveDayViewModel::class.java]
 
-    private val adapter = FiveDayListAdapter()
+    private val weatherAdapter: FiveDayListAdapter
 
     init {
-        binding.listview.adapter = adapter
-        viewModel.getWeather(18.487599.toLong(), (-33.958240).toLong()).collectIn(lifecycleOwner) { resource ->
-            binding.listview.fadeTo(Resource.Status.LOADING != resource.status)
-            Log.d("myT", "component: $resource")
-            resource.data?.let {
-                adapter.submitList(it.list)
-                updateCurrentWeather(it.list[0].mainWeather)
-            }
+        binding.listview.apply {
+            layoutManager = LinearLayoutManager(binding.root.context)
+            weatherAdapter = FiveDayListAdapter()
+            adapter = weatherAdapter
         }
     }
 
-    fun getWeatherWithLocation() {
-        viewModel.getWeather(18.487599.toLong(), (-33.958240).toLong())
+    fun getWeatherWithLocation(location: Location) {
+        viewModel.getWeather(
+            location.latitude.toLong(),
+            location.longitude.toLong()
+        ).collectIn(lifecycleOwner) { resource ->
+            binding.progressBar.fadeTo(Resource.Status.LOADING == resource.status)
+
+            resource.data?.let {
+                weatherAdapter.submitList(it.list)
+                binding.listview.fadeTo(true)
+                updateCurrentWeather(it)
+            }
+        }
     }
 
     @AssistedFactory
@@ -48,7 +56,7 @@ class FiveDayComponent @AssistedInject constructor(
             lifecycleOwner: LifecycleOwner,
             storeOwner: ViewModelStoreOwner,
             binding: FiveDayComponentBinding,
-            updateCurrentWeather: (MainWeather) -> Unit
+            updateCurrentWeather: (FiveDayWeather) -> Unit
         ): FiveDayComponent
     }
 }
