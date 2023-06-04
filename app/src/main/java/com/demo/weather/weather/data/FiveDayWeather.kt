@@ -5,10 +5,10 @@ import com.google.gson.annotations.SerializedName
 
 data class FiveDayWeather (
 
-    @SerializedName("cod"     ) val cod     : String?         = null,
-    @SerializedName("message" ) val message : Int?            = null,
-    @SerializedName("cnt"     ) val cnt     : Int?            = null,
-    @SerializedName("list"    ) val weatherList    : ArrayList<WeatherList> = arrayListOf(),
-    @SerializedName("city"    ) val city    : City?           = City()
+    @SerializedName("cod"     ) val cod     : String,
+    @SerializedName("message" ) val message : Int,
+    @SerializedName("cnt"     ) val cnt     : Int,
+    @SerializedName("list"    ) val list    : List<Weather>,
+    @SerializedName("city"    ) val city    : City
 
 )

@@ -18,7 +18,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@id/icon"
-        tools:textColor="@color/black"
         tools:text="Location"/>
     
     <ImageView
@@ -44,7 +43,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@id/description"
-        tools:textColor="@color/black"
         tools:text="16°"/>
 
     <TextView
@@ -57,7 +55,6 @@
         app:layout_constraintTop_toBottomOf="@id/temperature"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        tools:textColor="@color/black"
         tools:text="Partly Cloudy 22° / 16°"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -3,7 +3,7 @@ package com.demo.weather.weather.data
 import com.google.gson.annotations.SerializedName
 
 
-data class Main (
+data class MainWeather (
 
   @SerializedName("temp"       ) val temp      : Double? = null,
   @SerializedName("feels_like" ) val feelsLike : Double? = null,

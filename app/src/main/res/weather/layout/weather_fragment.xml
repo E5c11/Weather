@@ -1,12 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.motion.widget.MotionLayout
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    app:layoutDescription="@xml/weather_motion_scene"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/simple_gradient"
     tools:context="com.demo.weather.weather.ui.WeatherFragment">
 
-</androidx.constraintlayout.motion.widget.MotionLayout>
+    <include
+        android:id="@+id/current_weather_component"
+        layout="@layout/current_weather_component"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <include
+        android:id="@+id/five_day_component"
+        layout="@layout/five_day_component"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_medium"
+        android:layout_marginEnd="@dimen/spacing_medium"
+        app:layout_constraintTop_toBottomOf="@id/current_weather_component"/>
+
+    <include
+        android:id="@+id/hourly_component"
+        layout="@layout/hourly_component"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/five_day_component"/>
+
+    <include
+        android:id="@+id/map_component"
+        layout="@layout/map_component"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

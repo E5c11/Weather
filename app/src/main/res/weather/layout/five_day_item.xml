@@ -29,7 +29,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toEndOf="@id/icon"
         app:layout_constraintBottom_toBottomOf="parent"
-        tools:textColor="@color/black"
         tools:text="Sat"/>
 
     <TextView
@@ -43,7 +42,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        tools:textColor="@color/black"
         tools:text="Partly Cloudy 22° / 16°"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

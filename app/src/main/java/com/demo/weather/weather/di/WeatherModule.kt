@@ -1,9 +1,9 @@
 package com.demo.weather.weather.di
 
-import com.demo.weather.common.helper.Constant.BASE_URL
 import com.demo.weather.weather.RemoteWeatherDataSource
 import com.demo.weather.weather.WeatherDataSource
 import com.demo.weather.weather.WeatherRepository
+import com.demo.weather.weather.helper.WeatherConstants.BASE_DATA_URL
 import com.demo.weather.weather.io.WeatherApi
 import dagger.Module
 import dagger.Provides
@@ -19,7 +19,7 @@ object WeatherModule {
 
     @Provides
     fun providesWeatherApi(client: OkHttpClient): WeatherApi = Retrofit.Builder()
-        .baseUrl(BASE_URL)
+        .baseUrl(BASE_DATA_URL)
         .addConverterFactory(GsonConverterFactory.create())
         .client(client)
         .build()

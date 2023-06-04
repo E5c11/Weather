@@ -3,13 +3,15 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/text_disabled_dark"
+    android:alpha="0.7"
+    app:cardCornerRadius="@dimen/card_radius"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/simple_gradient"
         android:padding="@dimen/spacing_medium">
 
         <TextView
@@ -23,8 +25,7 @@
             android:textAllCaps="true"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/below_header"
-            tools:textColor="@color/black"/>
+            app:layout_constraintBottom_toTopOf="@id/below_header"/>
 
         <View
             android:id="@+id/below_header"
@@ -40,7 +41,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing_small"
-            tools:listitem="@layout/five_day_list_item"
+            tools:listitem="@layout/five_day_item"
             app:layout_constraintTop_toBottomOf="@id/below_header" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
