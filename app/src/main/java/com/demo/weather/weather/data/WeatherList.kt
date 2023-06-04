@@ -5,7 +5,7 @@ import com.demo.weather.Wind
 import com.google.gson.annotations.SerializedName
 
 
-data class List (
+data class WeatherList (
 
     @SerializedName("dt"         ) val dt         : Int?               = null,
     @SerializedName("main"       ) val main       : Main?              = Main(),

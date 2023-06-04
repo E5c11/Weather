@@ -8,7 +8,7 @@ data class FiveDayWeather (
     @SerializedName("cod"     ) val cod     : String?         = null,
     @SerializedName("message" ) val message : Int?            = null,
     @SerializedName("cnt"     ) val cnt     : Int?            = null,
-    @SerializedName("list"    ) val list    : ArrayList<List> = arrayListOf(),
+    @SerializedName("list"    ) val weatherList    : ArrayList<WeatherList> = arrayListOf(),
     @SerializedName("city"    ) val city    : City?           = City()
 
 )
