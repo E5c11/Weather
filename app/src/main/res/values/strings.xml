@@ -1,3 +1,18 @@
 <resources>
     <string name="app_name">Weather</string>
+
+    <string name="general_error_title">Something went wrong</string>
+    <string name="general_error">An error has occurred please try again</string>
+
+    <string name="location_error_title">Location not Found</string>
+    <string name="location_error">Please ensure that you have either GPS or a network connection</string>
+
+    <string name="weather_error_title">Weather not found</string>
+    <string name="weather_error">The data seems to be missing, please try again later</string>
+
+    <string name="location_permission_error_title">Weather is App is unavailable</string>
+    <string name="location_permission_error">Weather App requires permission to access your current location, you can turn this function on in settings</string>
+    <string name="open_setting">Open Settings</string>
+
+    <string name="okay">Okay</string>
 </resources>

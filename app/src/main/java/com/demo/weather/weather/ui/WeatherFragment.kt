@@ -1,18 +1,23 @@
 package com.demo.weather.weather.ui
 
 import android.Manifest
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.provider.Settings
 import android.util.Log
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.demo.weather.R
+import com.demo.weather.common.helper.ErrorParser
 import com.demo.weather.common.helper.hasLocationPermission
 import com.demo.weather.databinding.WeatherFragmentBinding
 import com.demo.weather.weather.component.CurrentWeatherComponent
 import com.demo.weather.weather.component.FiveDayComponent
+import com.demo.weather.weather.io.LocationPermissionDeniedException
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -29,9 +34,6 @@ class WeatherFragment: Fragment(R.layout.weather_fragment) {
     private lateinit var currentWeatherComponent: CurrentWeatherComponent
     private lateinit var fiveDayComponent: FiveDayComponent
 
-    private val successCode = 0
-    private val deniedCode = 1
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = WeatherFragmentBinding.bind(view)
@@ -40,6 +42,10 @@ class WeatherFragment: Fragment(R.layout.weather_fragment) {
             this, this, binding.fiveDayComponent,
             updateCurrentWeather = {
                 currentWeatherComponent.updateWeather(it)
+            },
+            displayError = {
+                findNavController()
+                    .navigate(WeatherFragmentDirections.actionGlobalErrorFragment(it))
             }
         )
 
@@ -47,12 +53,15 @@ class WeatherFragment: Fragment(R.layout.weather_fragment) {
             this, this, binding.currentWeatherComponent,
             updateCurrentLocation = {
                 fiveDayComponent.getWeatherWithLocation(it)
+            },
+            displayError = {
+                findNavController()
+                    .navigate(WeatherFragmentDirections.actionGlobalErrorFragment(it))
             }
         )
 
         requestLocation()
     }
-
 
     private fun requestLocation() {
         if (requireContext().hasLocationPermission()) currentWeatherComponent.obtainLocation()
@@ -62,7 +71,12 @@ class WeatherFragment: Fragment(R.layout.weather_fragment) {
     private val requestPermission =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
             if (isGranted) currentWeatherComponent.obtainLocation()
-            else askPermission()
+            else findNavController()
+                .navigate(
+                    WeatherFragmentDirections.actionGlobalErrorFragment(
+                        LocationPermissionDeniedException()
+                    )
+                )
         }
 
     private fun askPermission() {

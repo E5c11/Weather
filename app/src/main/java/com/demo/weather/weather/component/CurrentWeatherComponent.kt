@@ -10,6 +10,7 @@ import com.demo.weather.R
 import com.demo.weather.common.helper.collectIn
 import com.demo.weather.common.helper.fadeTo
 import com.demo.weather.common.helper.toCamelCase
+import com.demo.weather.common.io.ActionableException
 import com.demo.weather.databinding.CurrentWeatherComponentBinding
 import com.demo.weather.weather.data.FiveDayWeather
 import com.demo.weather.weather.helper.WeatherConstants.STORAGE_URL
@@ -17,12 +18,14 @@ import com.demo.weather.weather.viewmodel.CurrentWeatherViewModel
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
+import java.lang.Exception
 
 class CurrentWeatherComponent @AssistedInject constructor(
     @Assisted private val lifecycleOwner: LifecycleOwner,
     @Assisted private val storeOwner: ViewModelStoreOwner,
     @Assisted private val binding: CurrentWeatherComponentBinding,
-    @Assisted private val updateCurrentLocation: (Location) -> Unit
+    @Assisted private val updateCurrentLocation: (Location) -> Unit,
+    @Assisted private val displayError: (ActionableException) -> Unit
 ) {
 
     private val viewModel: CurrentWeatherViewModel =
@@ -30,6 +33,9 @@ class CurrentWeatherComponent @AssistedInject constructor(
 
     fun obtainLocation() {
         viewModel.obtainLocation().collectIn(lifecycleOwner) { resource ->
+            resource.error?.let {
+                displayError(it)
+            }
             resource.data?.let {
                 updateCurrentLocation(it)
             }
@@ -63,7 +69,8 @@ class CurrentWeatherComponent @AssistedInject constructor(
             lifecycleOwner: LifecycleOwner,
             storeOwner: ViewModelStoreOwner,
             binding: CurrentWeatherComponentBinding,
-            updateCurrentLocation: (Location) -> Unit
+            updateCurrentLocation: (Location) -> Unit,
+            displayError: (ActionableException) -> Unit
         ): CurrentWeatherComponent
     }
 }

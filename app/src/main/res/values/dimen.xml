@@ -20,4 +20,6 @@
     <dimen name="list_item_height">44dp</dimen>
     <dimen name="list_icon_width">44dp</dimen>
     <dimen name="icon_width">100dp</dimen>
+    <dimen name="logo_width">239dp</dimen>
+    <dimen name="logo_height">102dp</dimen>
 </resources>

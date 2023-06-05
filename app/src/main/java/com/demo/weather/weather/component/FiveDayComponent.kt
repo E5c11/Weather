@@ -13,13 +13,15 @@ import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
 import com.demo.weather.common.helper.fadeTo
+import com.demo.weather.common.io.ActionableException
 import com.demo.weather.weather.data.FiveDayWeather
 
 class FiveDayComponent @AssistedInject constructor(
     @Assisted private val lifecycleOwner: LifecycleOwner,
     @Assisted private val storeOwner: ViewModelStoreOwner,
     @Assisted private val binding: FiveDayComponentBinding,
-    @Assisted private val updateCurrentWeather: (FiveDayWeather) -> Unit
+    @Assisted private val updateCurrentWeather: (FiveDayWeather) -> Unit,
+    @Assisted private val displayError: (ActionableException) -> Unit
 ) {
 
     private val viewModel: FiveDayViewModel =
@@ -41,7 +43,9 @@ class FiveDayComponent @AssistedInject constructor(
             location.longitude.toLong()
         ).collectIn(lifecycleOwner) { resource ->
             binding.progressBar.fadeTo(Resource.Status.LOADING == resource.status)
-
+            resource.error?.let {
+                displayError(it)
+            }
             resource.data?.let {
                 weatherAdapter.submitList(it.list)
                 binding.listview.fadeTo(true)
@@ -56,7 +60,8 @@ class FiveDayComponent @AssistedInject constructor(
             lifecycleOwner: LifecycleOwner,
             storeOwner: ViewModelStoreOwner,
             binding: FiveDayComponentBinding,
-            updateCurrentWeather: (FiveDayWeather) -> Unit
+            updateCurrentWeather: (FiveDayWeather) -> Unit,
+            displayError: (ActionableException) -> Unit
         ): FiveDayComponent
     }
 }

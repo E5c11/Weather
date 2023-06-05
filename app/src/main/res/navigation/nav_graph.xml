@@ -10,5 +10,19 @@
         android:id="@+id/weatherFragment"
         android:name="com.demo.weather.weather.ui.WeatherFragment"
         android:label="weather_fragment"
-        tools:layout="@layout/weather_fragment" />
+        tools:layout="@layout/weather_fragment" >
+        <action
+            android:id="@+id/action_weatherFragment_to_errorFragment"
+            app:destination="@id/errorFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/errorFragment"
+        android:name="com.demo.weather.common.ui.ErrorFragment"
+        android:label="error_fragment"
+        tools:layout="@layout/error_fragment" >
+        <argument
+            android:name="exception"
+            app:argType="com.demo.weather.common.io.ActionableException" />
+    </fragment>
+    <action android:id="@+id/action_global_errorFragment" app:destination="@id/errorFragment" />
 </navigation>
