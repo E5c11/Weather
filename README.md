@@ -1,5 +1,10 @@
 Due to time constraints this is what I was able to produce.
 
+Setup:
+Please add 
+API_KEY = "{api_key}"
+to local.properties to build the app
+
 What would I add:
 1. tests, I believe tests help us to make sure our work is clean. It also gives you the freedom to change things in your code and know when you have broken something
 2. Better error handling, good error handling ensures less app crashes and a great user experience
