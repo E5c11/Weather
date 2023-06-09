@@ -4,6 +4,7 @@ import com.demo.weather.common.helper.Constant.LOADING
 import com.demo.weather.common.helper.Resource
 import com.demo.weather.common.io.ActionableException
 import com.demo.weather.weather.helper.FiveDayFlow
+import com.demo.weather.weather.io.WeatherFetchException
 import kotlinx.coroutines.flow.flow
 
 class WeatherRepository(
@@ -15,10 +16,10 @@ class WeatherRepository(
         try {
             val result = dataSource.getFiveDayWeather(lat, lng)
             emit(Resource.success(result))
-        } catch (e: ActionableException) {
+        } catch (e: WeatherFetchException) {
             emit(Resource.error(error = e))
         } catch (e: Exception) {
-            emit(Resource.error(ActionableException(error = e)))
+            emit(Resource.error(WeatherFetchException(error = e)))
         }
     }
 

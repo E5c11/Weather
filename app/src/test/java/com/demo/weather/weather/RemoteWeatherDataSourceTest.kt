@@ -10,7 +10,6 @@ import io.mockk.coVerify
 import io.mockk.mockk
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
-import okhttp3.ResponseBody
 import okhttp3.ResponseBody.Companion.toResponseBody
 import org.amshove.kluent.internal.assertFailsWith
 import org.amshove.kluent.shouldBeEqualTo
@@ -26,7 +25,7 @@ class RemoteWeatherDataSourceTest {
 
     private val weatherApi: WeatherApi = mockk()
 
-    private val repo = RemoteWeatherDataSource(weatherApi)
+    private val datasource = RemoteWeatherDataSource(weatherApi)
 
     private val mockData = FiveDayWeather(
         "",
@@ -41,7 +40,7 @@ class RemoteWeatherDataSourceTest {
         val response = Response.success(mockData)
         coEvery { weatherApi.getFiveDay(any(), any(), any(), any(), any()) } returns response
 
-        repo.getFiveDayWeather(123L, 321L).shouldBeEqualTo(mockData)
+        datasource.getFiveDayWeather(123L, 321L).shouldBeEqualTo(mockData)
 
         coVerify(exactly = 1) { weatherApi.getFiveDay(any(), any(), any(), any(), any()) }
     }
@@ -51,7 +50,7 @@ class RemoteWeatherDataSourceTest {
 
         coEvery { weatherApi.getFiveDay(any(), any(), any(), any(), any()) } throws IOException()
 
-        assertFailsWith<WeatherFetchException> { repo.getFiveDayWeather(123L, 321L) }
+        assertFailsWith<WeatherFetchException> { datasource.getFiveDayWeather(123L, 321L) }
 
         coVerify(exactly = 1) { weatherApi.getFiveDay(any(), any(), any(), any(), any()) }
     }
@@ -61,7 +60,7 @@ class RemoteWeatherDataSourceTest {
         val response = Response.error<FiveDayWeather>(401, "".toResponseBody(null))
         coEvery { weatherApi.getFiveDay(any(), any(), any(), any(), any()) } returns response
 
-        assertFailsWith<WeatherFetchException> { repo.getFiveDayWeather(123L, 321L) }
+        assertFailsWith<WeatherFetchException> { datasource.getFiveDayWeather(123L, 321L) }
 
         coVerify(exactly = 1) { weatherApi.getFiveDay(any(), any(), any(), any(), any()) }
     }
