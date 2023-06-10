@@ -8,6 +8,7 @@ import com.demo.weather.location.io.LocationFetchException
 import com.demo.weather.location.io.LocationNotFoundException
 import io.mockk.coEvery
 import io.mockk.coVerify
+import io.mockk.every
 import io.mockk.mockk
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flowOf
@@ -24,12 +25,14 @@ import org.junit.runners.JUnit4
 class LocationRepositoryTest {
 
     private val dataSource: LocationDataSource = mockk()
+    private val location: Location = mockk()
 
     private val repo = LocationRepository(dataSource)
 
     @Test
     fun `A Successful fetch returns LOADING then SUCCESS`() = runTest {
-        val location = Location("")
+        every { location.latitude } returns -34.0
+        every { location.longitude } returns 18.0
         val result = flowOf(location)
         coEvery { dataSource.getCurrentLocation() } returns result
 
@@ -40,8 +43,8 @@ class LocationRepositoryTest {
 
             val emission2 = awaitItem()
             emission2.status.shouldBe(Resource.Status.SUCCESS)
-            emission2.data?.longitude?.shouldBeEqualTo(0.0)
-            emission2.data?.latitude?.shouldBeEqualTo(0.0)
+            emission2.data?.longitude?.shouldBeEqualTo(18.0)
+            emission2.data?.latitude?.shouldBeEqualTo(-34.0)
             cancelAndIgnoreRemainingEvents()
         }
 
