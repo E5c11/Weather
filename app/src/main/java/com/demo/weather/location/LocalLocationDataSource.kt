@@ -1,7 +1,6 @@
 package com.demo.weather.location
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.location.Location
 import android.os.CountDownTimer
 import android.os.Handler
@@ -9,32 +8,29 @@ import android.os.HandlerThread
 import android.os.Looper
 import com.demo.weather.common.helper.DispatcherProvider
 import com.demo.weather.location.io.LocationNotFoundException
+import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationResult
-import com.google.android.gms.location.LocationServices
-import com.google.android.gms.location.Priority
 import kotlinx.coroutines.android.asCoroutineDispatcher
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.flow.flowOn
-import java.util.Timer
 import javax.inject.Inject
 
+const val LOCATION_THREAD = "location.thread"
+
 class LocalLocationDataSource @Inject constructor(
-    context: Context,
+    private var locationClient: FusedLocationProviderClient,
+    private val locationRequest: LocationRequest,
     private val dispatcher: DispatcherProvider
 ): LocationDataSource {
-
-    private var locationClient = LocationServices.getFusedLocationProviderClient(context)
-    private val locationRequest = LocationRequest.Builder(Priority.PRIORITY_HIGH_ACCURACY, 100).build()
-
 
     @SuppressLint("MissingPermission")
     override suspend fun getCurrentLocation(): Flow<Location> = callbackFlow<Location> {
         Looper.prepare()
-        val dispatcherHandler = HandlerThread("locationThread")
+        val dispatcherHandler = HandlerThread(LOCATION_THREAD)
             .apply { start() }
             .looper.let { Handler(it) }
         dispatcherHandler.asCoroutineDispatcher()
@@ -67,6 +63,5 @@ class LocalLocationDataSource @Inject constructor(
             locationClient.removeLocationUpdates(locationCallback)
         }
     }.flowOn(dispatcher.io)
-
 
 }
