@@ -6,7 +6,7 @@ API_KEY = "{api_key}"
 to local.properties to build the app
 
 What would I add:
-1. tests, I believe tests help us to make sure our work is clean. It also gives you the freedom to change things in your code and know when you have broken something
+1. UI tests, I believe tests help us to make sure our work is clean. It also gives you the freedom to change things in your code and know when you have broken something
 2. Better error handling, good error handling ensures less app crashes and a great user experience
 3. gradle, Gradle is the source of many sleepless nights, so having a clean and well formed gradle makes a devs life easier
 
