@@ -1,5 +1,6 @@
 package com.demo.weather.weather.component
 
+import android.util.Log
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelStoreOwner
@@ -15,6 +16,7 @@ import com.demo.weather.weather.viewmodel.FiveDayViewModel
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
+import kotlin.math.roundToLong
 
 class FiveDayComponent @AssistedInject constructor(
     @Assisted private val lifecycleOwner: LifecycleOwner,
@@ -39,8 +41,8 @@ class FiveDayComponent @AssistedInject constructor(
 
     fun getWeatherWithLocation(location: Location) {
         viewModel.getWeather(
-            location.latitude!!.toLong(),
-            location.longitude!!.toLong()
+            (location.latitude!!).roundToLong(),
+            (location.longitude!!).roundToLong()
         ).collectIn(lifecycleOwner) { resource ->
             binding.progressBar.fadeTo(Resource.Status.LOADING == resource.status)
             resource.error?.let {

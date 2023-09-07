@@ -1,6 +1,5 @@
 package com.demo.weather.weather
 
-import android.util.Log
 import com.demo.weather.common.helper.Constant.LOADING
 import com.demo.weather.common.helper.Resource
 import com.demo.weather.weather.helper.FiveDayFlow
@@ -14,7 +13,6 @@ class WeatherRepository(
     fun fetch(lat: Long, lng: Long): FiveDayFlow = flow {
         emit(Resource.loading(LOADING))
         try {
-            Log.d("myT", "fetch: $lat")
             val result = dataSource.getFiveDayWeather(lat, lng)
             emit(Resource.success(result))
         } catch (e: WeatherFetchException) {

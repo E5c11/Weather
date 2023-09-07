@@ -51,6 +51,7 @@ android {
             jniLibs.srcDirs = ['libs']
             res.srcDirs = [
                     'src/main/res/weather',
+                    'src/main/res/map',
                     'src/main/res'
             ]
         }

@@ -10,6 +10,24 @@
     tools:context="com.demo.weather.weather.ui.WeatherFragment"
     app:layoutDescription="@xml/weather_fragment_scene">
 
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/search"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/top_guideline"
+        app:layout_constraintStart_toStartOf="@id/start_guideline"
+        app:layout_constraintEnd_toStartOf="@id/map"/>
+
+    <ImageView
+        android:id="@+id/map"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:src="@drawable/map_24"
+        app:layout_constraintTop_toTopOf="@id/search"
+        app:layout_constraintBottom_toBottomOf="@id/search"
+        app:layout_constraintEnd_toEndOf="@id/end_guideline"
+        app:layout_constraintDimensionRatio="1:1"/>
+
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/top_guideline"
         android:layout_width="wrap_content"
@@ -46,7 +64,7 @@
         android:textSize="@dimen/header_text"
         android:textColor="@color/white"
         android:visibility="gone"
-        app:layout_constraintTop_toTopOf="@id/top_guideline"
+        app:layout_constraintTop_toBottomOf="@id/search"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@id/icon"
