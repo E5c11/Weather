@@ -12,6 +12,7 @@ import com.demo.weather.common.helper.fadeTo
 import com.demo.weather.common.helper.toCamelCase
 import com.demo.weather.common.io.ActionableException
 import com.demo.weather.databinding.CurrentWeatherComponentBinding
+import com.demo.weather.databinding.WeatherFragmentBinding
 import com.demo.weather.weather.data.FiveDayWeather
 import com.demo.weather.weather.helper.WeatherConstants.STORAGE_URL
 import com.demo.weather.weather.viewmodel.CurrentWeatherViewModel
@@ -23,7 +24,7 @@ import java.lang.Exception
 class CurrentWeatherComponent @AssistedInject constructor(
     @Assisted private val lifecycleOwner: LifecycleOwner,
     @Assisted private val storeOwner: ViewModelStoreOwner,
-    @Assisted private val binding: CurrentWeatherComponentBinding,
+    @Assisted private val binding: WeatherFragmentBinding,
     @Assisted private val updateCurrentLocation: (Location) -> Unit,
     @Assisted private val displayError: (ActionableException) -> Unit
 ) {
@@ -68,7 +69,7 @@ class CurrentWeatherComponent @AssistedInject constructor(
         fun create(
             lifecycleOwner: LifecycleOwner,
             storeOwner: ViewModelStoreOwner,
-            binding: CurrentWeatherComponentBinding,
+            binding: WeatherFragmentBinding,
             updateCurrentLocation: (Location) -> Unit,
             displayError: (ActionableException) -> Unit
         ): CurrentWeatherComponent

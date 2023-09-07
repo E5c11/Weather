@@ -1,18 +1,12 @@
 package com.demo.weather.weather.ui
 
 import android.Manifest
-import android.content.Intent
-import android.content.pm.PackageManager
 import android.os.Bundle
-import android.provider.Settings
-import android.util.Log
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.demo.weather.R
-import com.demo.weather.common.helper.ErrorParser
 import com.demo.weather.common.helper.hasLocationPermission
 import com.demo.weather.databinding.WeatherFragmentBinding
 import com.demo.weather.weather.component.CurrentWeatherComponent
@@ -50,7 +44,7 @@ class WeatherFragment: Fragment(R.layout.weather_fragment) {
         )
 
         currentWeatherComponent = currentWeatherComponentFactory.create(
-            this, this, binding.currentWeatherComponent,
+            this, this, binding,
             updateCurrentLocation = {
                 fiveDayComponent.getWeatherWithLocation(it)
             },

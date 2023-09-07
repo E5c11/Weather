@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ConstraintSet android:id="@+id/start">
+        <Constraint
+            android:id="@+id/location"
+            android:alpha="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@id/top_guideline"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/icon"/>
+        <Constraint
+            android:id="@+id/icon"
+            android:layout_width="@dimen/icon_width"
+            android:layout_height="@dimen/icon_width"
+            app:layout_constraintTop_toBottomOf="@id/location"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/temperature"/>
+        <Constraint
+            android:id="@+id/temperature"
+            android:layout_width="@dimen/icon_width"
+            android:layout_height="@dimen/icon_width"
+            app:layout_constraintTop_toBottomOf="@id/icon"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/description">
+            <CustomAttribute
+                app:attributeName="textSize"
+                app:customFloatValue="70"/>
+        </Constraint>
+        <Constraint
+            android:id="@+id/description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/temperature"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+        <Constraint
+            android:id="@+id/progress_bar"
+            android:visibility="visible" />
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/end">
+        <Constraint
+            android:id="@+id/location"
+            android:alpha="0" />
+        <Constraint
+            android:id="@+id/temperature"
+            android:layout_width="@dimen/icon_half_width"
+            android:layout_height="@dimen/icon_half_width"
+            app:layout_constraintTop_toTopOf="@id/top_guideline"
+            app:layout_constraintStart_toStartOf="@id/start_guideline"
+            app:layout_constraintEnd_toStartOf="@id/icon">
+            <CustomAttribute
+                app:attributeName="textSize"
+                app:customFloatValue="35"/>/>
+        </Constraint>
+        <Constraint
+            android:id="@+id/icon"
+            android:layout_width="@dimen/icon_half_width"
+            android:layout_height="@dimen/icon_half_width"
+            app:layout_constraintStart_toEndOf="@id/temperature"
+            app:layout_constraintEnd_toStartOf="@id/description"
+            app:layout_constraintTop_toTopOf="@id/temperature"
+            app:layout_constraintBottom_toBottomOf="@id/temperature"/>
+        <Constraint
+            android:id="@+id/description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@id/temperature"
+            app:layout_constraintBottom_toBottomOf="@id/temperature"
+            app:layout_constraintStart_toEndOf="@id/icon"
+            app:layout_constraintEnd_toEndOf="@id/end_guideline"/>
+        <Constraint
+            android:id="@+id/progress_bar"
+            android:visibility="gone" />
+    </ConstraintSet>
+
+    <Transition
+        app:constraintSetEnd="@id/end"
+        app:constraintSetStart="@+id/start">
+        <OnSwipe
+            app:dragDirection="dragUp"
+            app:dragScale="4"/>
+    </Transition>
+</MotionScene>

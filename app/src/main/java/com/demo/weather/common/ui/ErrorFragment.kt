@@ -1,9 +1,11 @@
 package com.demo.weather.common.ui
 
+import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import androidx.fragment.app.Fragment
+import androidx.appcompat.app.AlertDialog
+import androidx.fragment.app.DialogFragment
 import androidx.navigation.fragment.findNavController
 import com.demo.weather.R
 import com.demo.weather.common.helper.ErrorParser
@@ -13,18 +15,23 @@ import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class ErrorFragment: Fragment(R.layout.error_fragment) {
+class ErrorFragment: DialogFragment() {
 
     @Inject
     lateinit var errorParser: ErrorParser
 
     private lateinit var binding: ErrorFragmentBinding
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        binding = ErrorFragmentBinding.bind(view)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        binding = ErrorFragmentBinding.inflate(layoutInflater)
         val args = ErrorFragmentArgs.fromBundle(requireArguments())
         setup(args)
+    }
+
+    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        val args = ErrorFragmentArgs.fromBundle(requireArguments())
+        return dialogSetup(args)
     }
 
     private fun setup(args: ErrorFragmentArgs) = binding.apply {
@@ -45,6 +52,13 @@ class ErrorFragment: Fragment(R.layout.error_fragment) {
             }
         }
     }
+
+    private fun dialogSetup(args: ErrorFragmentArgs) = AlertDialog.Builder(
+        requireContext(), androidx.appcompat.R.style.AlertDialog_AppCompat_Light
+    ).apply {
+        setView(binding.root)
+        setup(args)
+    }.create()
 
     private fun startPermissionIntent(intent: Intent) {
         val newIntent = if (intent.data != null) Intent(intent.action, intent.data)

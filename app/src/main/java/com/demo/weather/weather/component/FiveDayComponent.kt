@@ -14,6 +14,7 @@ import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
 import com.demo.weather.common.helper.fadeTo
 import com.demo.weather.common.io.ActionableException
+import com.demo.weather.databinding.WeatherFragmentBinding
 import com.demo.weather.weather.data.FiveDayWeather
 
 class FiveDayComponent @AssistedInject constructor(
