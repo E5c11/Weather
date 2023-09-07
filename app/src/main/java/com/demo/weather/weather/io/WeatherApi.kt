@@ -17,4 +17,13 @@ interface WeatherApi {
         @Query("apiKey") apiKey: String
     ): Response<FiveDayWeather>
 
+    @GET("forecast/hourly")
+    suspend fun getHourly(
+        @Query("lat") lat: String,
+        @Query("lon") lon: String,
+        @Query("cnt") count: String,
+        @Query("units") units: String,
+        @Query("apiKey") apiKey: String
+    )
+
 }

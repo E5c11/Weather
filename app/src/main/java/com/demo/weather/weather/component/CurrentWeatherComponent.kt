@@ -1,6 +1,5 @@
 package com.demo.weather.weather.component
 
-import android.location.Location
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelStoreOwner
@@ -11,15 +10,14 @@ import com.demo.weather.common.helper.collectIn
 import com.demo.weather.common.helper.fadeTo
 import com.demo.weather.common.helper.toCamelCase
 import com.demo.weather.common.io.ActionableException
-import com.demo.weather.databinding.CurrentWeatherComponentBinding
 import com.demo.weather.databinding.WeatherFragmentBinding
+import com.demo.weather.location.Location
 import com.demo.weather.weather.data.FiveDayWeather
 import com.demo.weather.weather.helper.WeatherConstants.STORAGE_URL
 import com.demo.weather.weather.viewmodel.CurrentWeatherViewModel
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
-import java.lang.Exception
 
 class CurrentWeatherComponent @AssistedInject constructor(
     @Assisted private val lifecycleOwner: LifecycleOwner,
