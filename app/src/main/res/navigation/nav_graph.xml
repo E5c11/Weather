@@ -14,6 +14,9 @@
         <action
             android:id="@+id/action_weatherFragment_to_errorFragment"
             app:destination="@id/errorFragment" />
+        <action
+            android:id="@+id/action_weatherFragment_to_mapFragment"
+            app:destination="@id/mapFragment" />
     </fragment>
     <fragment
         android:id="@+id/errorFragment"
@@ -25,4 +28,9 @@
             app:argType="com.demo.weather.common.io.ActionableException" />
     </fragment>
     <action android:id="@+id/action_global_errorFragment" app:destination="@id/errorFragment" />
+    <fragment
+        android:id="@+id/mapFragment"
+        android:name="com.demo.weather.map.MapFragment"
+        android:label="map_fragment"
+        tools:layout="@layout/map_fragment" />
 </navigation>
