@@ -1,4 +1,4 @@
-package com.demo.weather.location
+package com.demo.weather.location.service
 
 import com.demo.weather.location.data.Location
 

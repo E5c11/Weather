@@ -4,8 +4,9 @@ import android.location.Location
 import app.cash.turbine.test
 import com.demo.weather.common.helper.Constant.FINDING_LOCATION
 import com.demo.weather.common.helper.Resource
-import com.demo.weather.location.io.LocationFetchException
-import com.demo.weather.location.io.LocationNotFoundException
+import com.demo.weather.location.data.exception.LocationFetchException
+import com.demo.weather.location.data.exception.LocationNotFoundException
+import com.demo.weather.location.io.LocationDataSource
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.every

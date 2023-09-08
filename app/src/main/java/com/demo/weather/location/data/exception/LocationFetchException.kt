@@ -1,4 +1,4 @@
-package com.demo.weather.location.io
+package com.demo.weather.location.data.exception
 
 import com.demo.weather.common.io.ActionableException
 

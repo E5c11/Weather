@@ -1,8 +1,9 @@
-package com.demo.weather.location
+package com.demo.weather.location.io
 
 import android.annotation.SuppressLint
 import android.util.Log
 import com.demo.weather.common.helper.DispatcherProvider
+import com.demo.weather.location.service.LocationService
 import com.demo.weather.location.data.Location
 import com.demo.weather.timer.Timer
 import kotlinx.coroutines.channels.awaitClose

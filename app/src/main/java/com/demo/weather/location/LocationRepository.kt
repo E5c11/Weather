@@ -5,8 +5,9 @@ import com.demo.weather.common.helper.Resource
 import com.demo.weather.common.io.ActionableException
 import com.demo.weather.location.data.Location
 import com.demo.weather.location.helper.LocationFlow
-import com.demo.weather.location.io.LocationFetchException
-import com.demo.weather.location.io.LocationNotFoundException
+import com.demo.weather.location.data.exception.LocationFetchException
+import com.demo.weather.location.data.exception.LocationNotFoundException
+import com.demo.weather.location.io.LocationDataSource
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 

@@ -8,7 +8,7 @@ import com.demo.weather.BuildConfig
 import com.demo.weather.R
 import com.demo.weather.common.data.ErrorState
 import com.demo.weather.common.io.ActionableException
-import com.demo.weather.location.io.LocationNotFoundException
+import com.demo.weather.location.data.exception.LocationNotFoundException
 import com.demo.weather.weather.io.LocationPermissionDeniedException
 import com.demo.weather.weather.io.WeatherFetchException
 import javax.inject.Inject
