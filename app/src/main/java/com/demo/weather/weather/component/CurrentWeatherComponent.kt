@@ -11,7 +11,7 @@ import com.demo.weather.common.io.ActionableException
 import com.demo.weather.databinding.WeatherFragmentBinding
 import com.demo.weather.location.data.Location
 import com.demo.weather.location.viewmodel.LocationViewModel
-import com.demo.weather.weather.data.FiveDayWeather
+import com.demo.weather.weather.data.entity.FiveDayWeather
 import com.demo.weather.weather.helper.WeatherConstants.STORAGE_URL
 
 class CurrentWeatherComponent constructor(

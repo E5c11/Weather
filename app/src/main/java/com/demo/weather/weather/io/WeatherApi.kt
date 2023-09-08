@@ -1,9 +1,8 @@
 package com.demo.weather.weather.io
 
-import com.demo.weather.weather.data.FiveDayWeather
+import com.demo.weather.weather.data.entity.FiveDayWeather
 import retrofit2.Response
 import retrofit2.http.GET
-import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface WeatherApi {

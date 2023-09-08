@@ -8,7 +8,7 @@ import com.demo.weather.common.helper.fadeTo
 import com.demo.weather.common.io.ActionableException
 import com.demo.weather.databinding.FiveDayComponentBinding
 import com.demo.weather.location.data.Location
-import com.demo.weather.weather.data.FiveDayWeather
+import com.demo.weather.weather.data.entity.FiveDayWeather
 import com.demo.weather.weather.viewmodel.HourlyViewModel
 import kotlin.math.roundToLong
 

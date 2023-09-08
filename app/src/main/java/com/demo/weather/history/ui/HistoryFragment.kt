@@ -1,4 +1,4 @@
-package com.demo.weather.history
+package com.demo.weather.history.ui
 
 import androidx.fragment.app.Fragment
 import com.demo.weather.R
