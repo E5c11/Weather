@@ -1,5 +1,6 @@
 package com.demo.weather.weather.component
 
+import android.util.Log
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelStoreOwner
@@ -32,6 +33,7 @@ class CurrentWeatherComponent @AssistedInject constructor(
 
     fun obtainLocation() {
         viewModel.obtainLocation().collectIn(lifecycleOwner) { resource ->
+            Log.d("myT", "obtainLocation: ${resource.data}")
             resource.error?.let {
                 displayError(it)
             }

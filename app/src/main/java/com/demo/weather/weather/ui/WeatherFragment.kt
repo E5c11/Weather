@@ -74,7 +74,7 @@ class WeatherFragment: Fragment(R.layout.weather_fragment) {
         }
 
     private fun askPermission() {
-        requestPermission.launch(Manifest.permission.ACCESS_COARSE_LOCATION)
+        requestPermission.launch(Manifest.permission.ACCESS_FINE_LOCATION)
     }
 
 }

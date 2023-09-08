@@ -11,7 +11,7 @@ class RemoteWeatherDataSource @Inject constructor(
 ): WeatherDataSource {
     override suspend fun getFiveDayWeather(lat: Long, lng: Long): FiveDayWeather {
         return try {
-            val result = weatherApi.getFiveDay(lat.toString(), lng.toString(), "5", "metric", API_KEY)
+            val result = weatherApi.getFiveDay(lat.toString(), lng.toString(), "metric", API_KEY)
             val body = result.body()
             if (result.isSuccessful && body != null) body
             else throw WeatherFetchException()

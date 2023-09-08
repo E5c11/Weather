@@ -24,7 +24,7 @@ fun <T> Flow<T>.collectIn(
 }
 
 fun Context.hasLocationPermission() =
-    (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
+    (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
             == PackageManager.PERMISSION_GRANTED)
 
 fun Long.getDayOfWeek(): String = SimpleDateFormat("EEE", Locale.ENGLISH).format(this * 1000)

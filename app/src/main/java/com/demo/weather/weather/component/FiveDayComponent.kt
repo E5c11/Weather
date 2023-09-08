@@ -40,6 +40,7 @@ class FiveDayComponent @AssistedInject constructor(
     }
 
     fun getWeatherWithLocation(location: Location) {
+        Log.d("myT", "getWeatherWithLocation: ")
         viewModel.getWeather(
             (location.latitude!!).roundToLong(),
             (location.longitude!!).roundToLong()

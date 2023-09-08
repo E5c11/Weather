@@ -1,6 +1,7 @@
 package com.demo.weather.location
 
 import android.annotation.SuppressLint
+import android.util.Log
 import com.demo.weather.common.helper.DispatcherProvider
 import com.demo.weather.timer.Timer
 import kotlinx.coroutines.channels.awaitClose
@@ -23,6 +24,7 @@ class LocalLocationDataSource @Inject constructor(
         try {
             locationService.startUpdates { location ->
                 lastLocationUpdate = location
+                Log.d("myT", "getCurrentLocation: ${location.accuracy}")
                 if (location.accuracy != null && location.accuracy < locationService.minimumAccuracy) {
                     trySend(location)
                     locationService.stopUpdates()

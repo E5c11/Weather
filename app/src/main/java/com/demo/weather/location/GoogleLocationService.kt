@@ -31,6 +31,7 @@ class GoogleLocationService(
         locationCallback = object : LocationCallback() {
             override fun onLocationResult(locationResult: LocationResult) {
                 for (l in locationResult.locations) {
+                    Log.d("myT", "onLocationResult: ${l.latitude}")
                     location(Location(l.latitude, l.longitude, l.accuracy))
                 }
             }

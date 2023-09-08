@@ -1,5 +1,6 @@
 package com.demo.weather.location
 
+import android.util.Log
 import com.demo.weather.common.helper.Constant.FINDING_LOCATION
 import com.demo.weather.common.helper.Resource
 import com.demo.weather.common.io.ActionableException
@@ -14,10 +15,14 @@ class LocationRepository @Inject constructor(private val dataSource: LocationDat
         emit(Resource.loading(FINDING_LOCATION))
         try {
             dataSource.getCurrentLocation().collect { location ->
+                Log.d("myT", "fetch: $location")
                 if (location == null) {
                     val lastLocation = checkLastLocation()
                     emit(Resource.success(lastLocation))
-                } else emit(Resource.success(location))
+                } else {
+                    Log.d("myT", "not null: ")
+                    emit(Resource.success(location))
+                }
             }
         } catch (e: ActionableException) {
             emit(Resource.error(error = e))

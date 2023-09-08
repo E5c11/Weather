@@ -139,21 +139,11 @@
         android:id="@+id/five_day_component"
         layout="@layout/five_day_component"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginBottom="@dimen/spacing_medium"
         app:layout_constraintStart_toEndOf="@id/start_guideline"
         app:layout_constraintEnd_toStartOf="@id/end_guideline"
         app:layout_constraintTop_toBottomOf="@id/current_weather_sep"
-        app:layout_constraintBottom_toTopOf="@id/hourly_component"/>
-
-    <include
-        android:id="@+id/hourly_component"
-        layout="@layout/hourly_component"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/spacing_medium"
-        app:layout_constraintStart_toEndOf="@id/start_guideline"
-        app:layout_constraintEnd_toStartOf="@id/end_guideline"
-        app:layout_constraintTop_toBottomOf="@id/five_day_component"/>
+        app:layout_constraintBottom_toTopOf="@id/bottom_guideline"/>
 
 </androidx.constraintlayout.motion.widget.MotionLayout>

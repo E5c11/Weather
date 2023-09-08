@@ -2,7 +2,7 @@
 <resources>
     <string name="icon_description">Current Condition</string>
 
-    <string name="five_day_forecast_title">5-Day Forecast</string>
+    <string name="five_day_forecast_title">3 Hourly Forecast</string>
     <string name="hourly_forecast_title">Hourly Forecast</string>
 
     <string name="day_summary">%1$s %2$s° / %3$s°</string>

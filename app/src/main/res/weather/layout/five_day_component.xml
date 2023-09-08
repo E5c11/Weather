@@ -12,7 +12,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/container"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:background="@drawable/simple_gradient"
         android:padding="@dimen/spacing_medium">
 
@@ -36,8 +36,7 @@
             android:layout_height="@dimen/divider_height"
             android:layout_marginTop="@dimen/spacing_small"
             android:background="@color/text_disabled_dark"
-            app:layout_constraintTop_toBottomOf="@id/title"
-            app:layout_constraintBottom_toTopOf="@id/listview"/>
+            app:layout_constraintTop_toBottomOf="@id/title"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/listview"
@@ -46,7 +45,8 @@
             android:layout_marginTop="@dimen/spacing_small"
             android:visibility="gone"
             tools:listitem="@layout/five_day_item"
-            app:layout_constraintTop_toBottomOf="@id/sep_below_header" />
+            app:layout_constraintTop_toBottomOf="@id/sep_below_header"
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
         <ProgressBar
             android:id="@+id/progress_bar"
