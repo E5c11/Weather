@@ -28,7 +28,7 @@ android {
         testInstrumentationRunner "com.demo.weather.CustomTestRunner"
 
         buildConfigField("String", "API_KEY", properties.getProperty("API_KEY"))
-        manifestPlaceholders = [MAP_KEY: "${properties.getProperty('MAP_KEY')}"]
+        resValue("string", "MAPS_API_KEY", properties.getProperty('MAP_KEY'))
     }
 
     buildTypes {
@@ -53,6 +53,7 @@ android {
             res.srcDirs = [
                     'src/main/res/weather',
                     'src/main/res/map',
+                    'src/main/res/histroy',
                     'src/main/res'
             ]
         }
