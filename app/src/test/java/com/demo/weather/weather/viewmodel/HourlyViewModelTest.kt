@@ -10,11 +10,11 @@ import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 
 @RunWith(JUnit4::class)
-class FiveDayViewModelTest {
+class HourlyViewModelTest {
 
     private val useCase: FetchFiveDayWeatherUseCase = mockk()
 
-    private val viewModel = FiveDayViewModel(useCase)
+    private val viewModel = HourlyViewModel(useCase)
 
     @Test
     fun `obtainLocation should only be called once`() {

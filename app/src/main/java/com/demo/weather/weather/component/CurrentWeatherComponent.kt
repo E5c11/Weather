@@ -1,9 +1,6 @@
 package com.demo.weather.weather.component
 
-import android.util.Log
 import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelStoreOwner
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.demo.weather.R
@@ -12,28 +9,21 @@ import com.demo.weather.common.helper.fadeTo
 import com.demo.weather.common.helper.toCamelCase
 import com.demo.weather.common.io.ActionableException
 import com.demo.weather.databinding.WeatherFragmentBinding
-import com.demo.weather.location.Location
+import com.demo.weather.location.data.Location
+import com.demo.weather.location.viewmodel.LocationViewModel
 import com.demo.weather.weather.data.FiveDayWeather
 import com.demo.weather.weather.helper.WeatherConstants.STORAGE_URL
-import com.demo.weather.weather.viewmodel.CurrentWeatherViewModel
-import dagger.assisted.Assisted
-import dagger.assisted.AssistedFactory
-import dagger.assisted.AssistedInject
 
-class CurrentWeatherComponent @AssistedInject constructor(
-    @Assisted private val lifecycleOwner: LifecycleOwner,
-    @Assisted private val storeOwner: ViewModelStoreOwner,
-    @Assisted private val binding: WeatherFragmentBinding,
-    @Assisted private val updateCurrentLocation: (Location) -> Unit,
-    @Assisted private val displayError: (ActionableException) -> Unit
+class CurrentWeatherComponent constructor(
+    private val lifecycleOwner: LifecycleOwner,
+    private val viewModel: LocationViewModel,
+    private val binding: WeatherFragmentBinding,
+    private val updateCurrentLocation: (Location) -> Unit,
+    private val displayError: (ActionableException) -> Unit
 ) {
-
-    private val viewModel: CurrentWeatherViewModel =
-        ViewModelProvider(storeOwner)[CurrentWeatherViewModel::class.java]
 
     fun obtainLocation() {
         viewModel.obtainLocation().collectIn(lifecycleOwner) { resource ->
-            Log.d("myT", "obtainLocation: ${resource.data}")
             resource.error?.let {
                 displayError(it)
             }
@@ -62,16 +52,5 @@ class CurrentWeatherComponent @AssistedInject constructor(
             data.list[0].description[0].description.toCamelCase()
         )
         progressBar.fadeTo(false)
-    }
-
-    @AssistedFactory
-    interface CurrentWeatherComponentFactory {
-        fun create(
-            lifecycleOwner: LifecycleOwner,
-            storeOwner: ViewModelStoreOwner,
-            binding: WeatherFragmentBinding,
-            updateCurrentLocation: (Location) -> Unit,
-            displayError: (ActionableException) -> Unit
-        ): CurrentWeatherComponent
     }
 }

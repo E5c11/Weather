@@ -6,7 +6,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class FiveDayViewModel @Inject constructor(
+class HourlyViewModel @Inject constructor(
     private val fiveDayWeatherUseCase: FetchFiveDayWeatherUseCase
 ): ViewModel() {
     fun getWeather(lat: Long, lng: Long) = fiveDayWeatherUseCase(lat, lng)

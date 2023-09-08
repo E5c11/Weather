@@ -1,5 +1,6 @@
 package com.demo.weather.weather.viewmodel
 
+import com.demo.weather.location.viewmodel.LocationViewModel
 import com.demo.weather.weather.usecase.FetchLocationUseCase
 import io.mockk.every
 import io.mockk.mockk
@@ -10,11 +11,11 @@ import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 
 @RunWith(JUnit4::class)
-class CurrentWeatherViewModelTest {
+class LocationViewModelTest {
 
     private val useCase: FetchLocationUseCase = mockk()
 
-    private val viewModel = CurrentWeatherViewModel(useCase)
+    private val viewModel = LocationViewModel(useCase)
 
     @Test
     fun `obtainLocation should only be called once`() {

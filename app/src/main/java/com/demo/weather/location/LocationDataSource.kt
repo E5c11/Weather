@@ -1,5 +1,6 @@
 package com.demo.weather.location
 
+import com.demo.weather.location.data.Location
 import kotlinx.coroutines.flow.Flow
 
 interface LocationDataSource {

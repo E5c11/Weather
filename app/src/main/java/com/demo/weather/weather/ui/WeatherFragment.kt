@@ -5,35 +5,35 @@ import android.os.Bundle
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.demo.weather.R
 import com.demo.weather.common.helper.hasLocationPermission
 import com.demo.weather.databinding.WeatherFragmentBinding
+import com.demo.weather.location.viewmodel.LocationViewModel
 import com.demo.weather.weather.component.CurrentWeatherComponent
-import com.demo.weather.weather.component.FiveDayComponent
+import com.demo.weather.weather.component.HourlyComponent
 import com.demo.weather.weather.io.LocationPermissionDeniedException
+import com.demo.weather.weather.viewmodel.HourlyViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class WeatherFragment: Fragment(R.layout.weather_fragment) {
 
-    @Inject
-    lateinit var currentWeatherComponentFactory: CurrentWeatherComponent.CurrentWeatherComponentFactory
-    @Inject
-    lateinit var fiveDayComponentFactory: FiveDayComponent.FiveDayComponentFactory
-
     private lateinit var binding: WeatherFragmentBinding
 
     private lateinit var currentWeatherComponent: CurrentWeatherComponent
-    private lateinit var fiveDayComponent: FiveDayComponent
+    private lateinit var hourlyComponent: HourlyComponent
+
+    private val locationViewModel: LocationViewModel by viewModels()
+    private val hourlyViewModel: HourlyViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = WeatherFragmentBinding.bind(view)
 
-        fiveDayComponent = fiveDayComponentFactory.create(
-            this, this, binding.fiveDayComponent,
+        hourlyComponent = HourlyComponent(
+            this, hourlyViewModel, binding.fiveDayComponent,
             updateCurrentWeather = {
                 currentWeatherComponent.updateWeather(it)
             },
@@ -43,10 +43,10 @@ class WeatherFragment: Fragment(R.layout.weather_fragment) {
             }
         )
 
-        currentWeatherComponent = currentWeatherComponentFactory.create(
-            this, this, binding,
+        currentWeatherComponent = CurrentWeatherComponent(
+            this, locationViewModel, binding,
             updateCurrentLocation = {
-                fiveDayComponent.getWeatherWithLocation(it)
+                hourlyComponent.getWeatherWithLocation(it)
             },
             displayError = {
                 findNavController()
@@ -57,7 +57,9 @@ class WeatherFragment: Fragment(R.layout.weather_fragment) {
         requestLocation()
 
         binding.map.setOnClickListener {
-            findNavController().navigate(WeatherFragmentDirections.actionWeatherFragmentToMapFragment())
+            findNavController().navigate(
+                WeatherFragmentDirections.actionWeatherFragmentToMapFragment(locationViewModel.getLocation())
+            )
         }
     }
 

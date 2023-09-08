@@ -3,6 +3,7 @@ package com.demo.weather.location
 import android.annotation.SuppressLint
 import android.util.Log
 import com.demo.weather.common.helper.DispatcherProvider
+import com.demo.weather.location.data.Location
 import com.demo.weather.timer.Timer
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
