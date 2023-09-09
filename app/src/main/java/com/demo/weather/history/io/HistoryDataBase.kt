@@ -2,10 +2,11 @@ package com.demo.weather.history.io
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
+import com.demo.weather.history.data.WeatherEntity
 
-//@Database(entities = [FiveDayWeather::class], version = 1)
+@Database(entities = [WeatherEntity::class], version = 1)
 abstract class HistoryDataBase: RoomDatabase() {
-    abstract fun fiveDayHistoryDao(): FiveDayHistoryDao
+    abstract fun fiveDayHistoryDao(): WeatherHistoryDao
 
     companion object {
         const val DB_NAME = "history_db"
