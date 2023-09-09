@@ -3,13 +3,13 @@ package com.demo.weather.weather.data
 import com.demo.weather.common.helper.suggestionPath
 import com.demo.weather.common.helper.toHour
 import com.demo.weather.common.helper.weatherIcon
-import com.demo.weather.weather.data.hourly.Weather
-import com.demo.weather.weather.data.hourly.HourlyDto
+import com.demo.weather.weather.data.weather.Weather
+import com.demo.weather.weather.data.weather.WeatherDto
 import com.demo.weather.weather.data.stations.Station
 import com.demo.weather.weather.data.stations.StationsDto
 import com.google.android.gms.maps.model.LatLng
 
-fun HourlyDto.toHourly(name: String, latLng: LatLng): List<Weather> = this.data.map {
+fun WeatherDto.toHourly(name: String, latLng: LatLng): List<Weather> = this.data.map {
     Weather(
         station = name.split("/")[0],
         latlng = latLng,

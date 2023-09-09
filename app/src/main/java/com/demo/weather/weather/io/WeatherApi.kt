@@ -1,6 +1,6 @@
 package com.demo.weather.weather.io
 
-import com.demo.weather.weather.data.hourly.HourlyDto
+import com.demo.weather.weather.data.weather.WeatherDto
 import com.demo.weather.weather.data.stations.StationsDto
 import retrofit2.Response
 import retrofit2.http.GET
@@ -29,7 +29,7 @@ interface WeatherApi {
         @Query("start") start: String,
         @Query("end") end: String,
         @Query("freq") frequency: String
-    ): Response<HourlyDto>
+    ): Response<WeatherDto>
 
 }
 

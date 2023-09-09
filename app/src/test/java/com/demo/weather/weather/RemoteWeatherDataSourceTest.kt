@@ -2,6 +2,7 @@ package com.demo.weather.weather
 
 import com.demo.weather.weather.io.WeatherApi
 import com.demo.weather.weather.data.exception.WeatherFetchException
+import com.demo.weather.weather.io.RemoteWeatherDataSource
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.mockk

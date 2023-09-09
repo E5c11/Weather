@@ -1,14 +1,12 @@
-package com.demo.weather.weather
+package com.demo.weather.weather.io
 
 import com.demo.weather.common.helper.getDate
 import com.demo.weather.common.helper.toDay
 import com.demo.weather.weather.data.exception.StationFetchException
 import com.demo.weather.weather.data.exception.WeatherFetchException
-import com.demo.weather.weather.data.hourly.Weather
+import com.demo.weather.weather.data.weather.Weather
 import com.demo.weather.weather.data.stations.StationsDto
 import com.demo.weather.weather.data.toHourly
-import com.demo.weather.weather.io.Frequency
-import com.demo.weather.weather.io.WeatherApi
 import com.google.android.gms.maps.model.LatLng
 import javax.inject.Inject
 

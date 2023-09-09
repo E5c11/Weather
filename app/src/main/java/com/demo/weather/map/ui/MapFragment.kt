@@ -6,7 +6,6 @@ import android.graphics.Canvas
 import android.location.Geocoder
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -17,7 +16,7 @@ import com.demo.weather.databinding.MarkerBinding
 import com.demo.weather.location.data.Location
 import com.demo.weather.location.viewmodel.LocationViewModel
 import com.demo.weather.map.viewmodel.MapViewModel
-import com.demo.weather.weather.data.hourly.Weather
+import com.demo.weather.weather.data.weather.Weather
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -25,7 +24,6 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import dagger.hilt.android.AndroidEntryPoint
-import kotlin.math.roundToLong
 
 @AndroidEntryPoint
 class MapFragment: Fragment(R.layout.map_fragment), OnMapReadyCallback {
@@ -94,6 +92,7 @@ class MapFragment: Fragment(R.layout.map_fragment), OnMapReadyCallback {
             draw(canvas)
             mapMarker.icon(BitmapDescriptorFactory.fromBitmap(markerBitmap))
             map.addMarker(mapMarker)
+            mapViewModel.addMarker(mapMarker)
         }
     }
 

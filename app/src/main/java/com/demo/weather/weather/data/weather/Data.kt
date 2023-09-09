@@ -1,4 +1,4 @@
-package com.demo.weather.weather.data.hourly
+package com.demo.weather.weather.data.weather
 
 import com.google.gson.annotations.SerializedName
 

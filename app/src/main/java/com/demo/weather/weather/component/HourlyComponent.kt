@@ -9,7 +9,7 @@ import com.demo.weather.common.helper.fadeTo
 import com.demo.weather.common.io.ActionableException
 import com.demo.weather.databinding.WeatherFragmentBinding
 import com.demo.weather.location.data.Location
-import com.demo.weather.weather.data.hourly.Weather
+import com.demo.weather.weather.data.weather.Weather
 import com.demo.weather.weather.viewmodel.HourlyViewModel
 
 class HourlyComponent(

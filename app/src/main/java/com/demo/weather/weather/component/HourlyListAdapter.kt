@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.demo.weather.R
 import com.demo.weather.databinding.HourlyItemBinding
-import com.demo.weather.weather.data.hourly.Weather
+import com.demo.weather.weather.data.weather.Weather
 
 class HourlyListAdapter: ListAdapter<Weather, HourlyListAdapter.ViewHolder>(
     DiffCallback()

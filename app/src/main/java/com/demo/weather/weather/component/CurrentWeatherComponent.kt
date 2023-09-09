@@ -12,7 +12,7 @@ import com.demo.weather.common.io.ActionableException
 import com.demo.weather.databinding.WeatherFragmentBinding
 import com.demo.weather.location.data.Location
 import com.demo.weather.location.viewmodel.LocationViewModel
-import com.demo.weather.weather.data.hourly.Weather
+import com.demo.weather.weather.data.weather.Weather
 import com.demo.weather.weather.helper.WeatherConstants.MATERIAL_ICON_URL
 
 class CurrentWeatherComponent constructor(

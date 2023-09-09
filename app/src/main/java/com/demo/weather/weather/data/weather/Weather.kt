@@ -1,4 +1,4 @@
-package com.demo.weather.weather.data.hourly
+package com.demo.weather.weather.data.weather
 
 import com.demo.weather.R
 import com.demo.weather.common.helper.getDate

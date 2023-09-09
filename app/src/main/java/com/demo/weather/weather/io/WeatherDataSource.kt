@@ -1,6 +1,6 @@
-package com.demo.weather.weather
+package com.demo.weather.weather.io
 
-import com.demo.weather.weather.data.hourly.Weather
+import com.demo.weather.weather.data.weather.Weather
 import com.demo.weather.weather.data.stations.StationsDto
 import com.demo.weather.weather.io.Frequency
 import com.google.android.gms.maps.model.LatLng
