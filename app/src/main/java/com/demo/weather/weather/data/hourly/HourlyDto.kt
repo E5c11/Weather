@@ -1,8 +1,8 @@
-package com.demo.weather.weather.data.daily
+package com.demo.weather.weather.data.hourly
 
 import com.google.gson.annotations.SerializedName
 
-data class Daily (
+data class HourlyDto (
     @SerializedName("meta" ) var meta : Meta?           = Meta(),
     @SerializedName("data" ) var data : ArrayList<Data> = arrayListOf()
 )

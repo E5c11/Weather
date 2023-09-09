@@ -26,7 +26,6 @@ class LocalLocationDataSource @Inject constructor(
         try {
             locationService.startUpdates { location ->
                 lastLocationUpdate = location
-                Log.d("myT", "getCurrentLocation: ${location.accuracy}")
                 if (location.accuracy != null && location.accuracy < locationService.minimumAccuracy) {
                     trySend(location)
                     locationService.stopUpdates()

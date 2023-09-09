@@ -8,6 +8,8 @@ import com.demo.weather.common.helper.fadeTo
 import com.demo.weather.common.io.ActionableException
 import com.demo.weather.databinding.FiveDayComponentBinding
 import com.demo.weather.location.data.Location
+import com.demo.weather.weather.data.hourly.HourData
+import com.demo.weather.weather.data.hourly.Hourly
 import com.demo.weather.weather.viewmodel.HourlyViewModel
 import kotlin.math.roundToLong
 
@@ -15,16 +17,16 @@ class HourlyComponent(
     private val lifecycleOwner: LifecycleOwner,
     private val viewModel: HourlyViewModel,
     private val binding: FiveDayComponentBinding,
-    private val updateCurrentWeather: (FiveDayWeather) -> Unit,
+    private val updateCurrentWeather: (HourData) -> Unit,
     private val displayError: (ActionableException) -> Unit
 ) {
 
-    private val weatherAdapter: FiveDayListAdapter
+    private val weatherAdapter: HourlyListAdapter
 
     init {
         binding.listview.apply {
             layoutManager = LinearLayoutManager(binding.root.context)
-            weatherAdapter = FiveDayListAdapter()
+            weatherAdapter = HourlyListAdapter()
             adapter = weatherAdapter
         }
     }
@@ -39,9 +41,9 @@ class HourlyComponent(
                 displayError(it)
             }
             resource.data?.let {
-                weatherAdapter.submitList(it.list)
+                weatherAdapter.submitList(it.hours)
                 binding.listview.fadeTo(true)
-                updateCurrentWeather(it)
+                updateCurrentWeather(it.hours[0])
             }
         }
     }

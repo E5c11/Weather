@@ -6,5 +6,6 @@
     <string name="hourly_forecast_title">Hourly Forecast</string>
 
     <string name="day_summary">%1$s %2$s° / %3$s°</string>
+    <string name="day_weather">%1$s° wind: %2$s km/h</string>
     <string name="current_temp">%1$s°</string>
 </resources>

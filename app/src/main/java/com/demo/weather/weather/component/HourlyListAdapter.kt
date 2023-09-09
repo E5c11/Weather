@@ -11,10 +11,11 @@ import com.demo.weather.R
 import com.demo.weather.common.helper.getDayOfWeek
 import com.demo.weather.common.helper.toCamelCase
 import com.demo.weather.databinding.FiveDayItemBinding
-import com.demo.weather.weather.helper.WeatherConstants.BASE_URL
+import com.demo.weather.weather.data.hourly.HourData
+import com.demo.weather.weather.data.hourly.Hourly
 import com.demo.weather.weather.helper.WeatherConstants.STORAGE_URL
 
-class FiveDayListAdapter: ListAdapter<Weather, FiveDayListAdapter.ViewHolder>(
+class HourlyListAdapter: ListAdapter<HourData, HourlyListAdapter.ViewHolder>(
     DiffCallback()
 ) {
 
@@ -24,36 +25,32 @@ class FiveDayListAdapter: ListAdapter<Weather, FiveDayListAdapter.ViewHolder>(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val weather = getItem(position)
-        holder.bind(weather)
+        val hour = getItem(position)
+        holder.bind(hour)
     }
 
     inner class ViewHolder(
         private val binding: FiveDayItemBinding
     ): RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(data: Weather) {
+        fun bind(data: HourData) {
             binding.apply {
-                Glide.with(root.context)
-                    .load("${STORAGE_URL}${data.description[0].icon}@2x.png")
-                    .diskCacheStrategy(DiskCacheStrategy.DATA)
-                    .into(icon)
-                day.text = data.dt.getDayOfWeek()
+                day.text = data.time
+                icon.setImageResource(data.icon ?: R.drawable.cloud)
                 description.text = root.context.getString(
-                    R.string.day_summary,
-                    data.description[0].description.toCamelCase(),
-                    data.mainWeather.tempMax.toInt().toString(),
-                    data.mainWeather.tempMin.toInt().toString()
+                    R.string.day_weather,
+                    data.temp.toString(),
+                    data.wind.toString()
                 )
             }
         }
     }
 
-    class DiffCallback : DiffUtil.ItemCallback<Weather>() {
-        override fun areItemsTheSame(oldItem: Weather, newItem: Weather) =
-            (oldItem.mainWeather == newItem.mainWeather && oldItem.dt == newItem.dt)
+    class DiffCallback : DiffUtil.ItemCallback<HourData>() {
+        override fun areItemsTheSame(oldItem: HourData, newItem: HourData) =
+            (oldItem.time == newItem.time && oldItem.temp == newItem.temp)
 
-        override fun areContentsTheSame(oldItem: Weather, newItem: Weather) =
+        override fun areContentsTheSame(oldItem: HourData, newItem: HourData) =
             oldItem == newItem
     }
 

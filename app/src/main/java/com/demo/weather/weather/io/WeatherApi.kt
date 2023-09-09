@@ -1,7 +1,7 @@
 package com.demo.weather.weather.io
 
-import com.demo.weather.weather.data.daily.Daily
-import com.demo.weather.weather.data.hourly.Hourly
+import com.demo.weather.weather.data.daily.DailyDto
+import com.demo.weather.weather.data.hourly.HourlyDto
 import com.demo.weather.weather.data.stations.Stations
 import retrofit2.Response
 import retrofit2.http.GET
@@ -29,7 +29,7 @@ interface WeatherApi {
         @Query("station") station: String,
         @Query("start") start: String,
         @Query("end") end: String
-    ): Response<Hourly>
+    ): Response<HourlyDto>
 
     @Headers(
         "x-rapidapi-key: d6ca539fb1mshc59955312733a25p1c5c8ejsne2dc981ca13c",
@@ -40,6 +40,6 @@ interface WeatherApi {
         @Query("station") station: String,
         @Query("start") start: String,
         @Query("end") end: String
-    ): Response<Daily>
+    ): Response<DailyDto>
 
 }

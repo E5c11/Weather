@@ -11,6 +11,7 @@ import com.demo.weather.common.io.ActionableException
 import com.demo.weather.databinding.WeatherFragmentBinding
 import com.demo.weather.location.data.Location
 import com.demo.weather.location.viewmodel.LocationViewModel
+import com.demo.weather.weather.data.hourly.HourData
 import com.demo.weather.weather.helper.WeatherConstants.STORAGE_URL
 
 class CurrentWeatherComponent constructor(
@@ -32,24 +33,13 @@ class CurrentWeatherComponent constructor(
         }
     }
 
-    fun updateWeather(data: FiveDayWeather) = binding.apply {
+    fun updateWeather(data: HourData) = binding.apply {
         location.fadeTo(true)
-        location.text = data.city.name
+        location.text = data.station
         icon.fadeTo(true)
-        Glide.with(root.context)
-            .load("${STORAGE_URL}${data.list[0].description[0].icon}@2x.png")
-            .diskCacheStrategy(DiskCacheStrategy.DATA)
-            .into(icon)
+        icon.setImageResource(data.icon ?: R.id.icon)
         temperature.fadeTo(true)
-        temperature.text = root.context.getString(
-            R.string.current_temp,
-            data.list[0].mainWeather.temp.toInt().toString()
-        )
-        description.fadeTo(true)
-        description.text = root.context.getString(
-            R.string.current_temp,
-            data.list[0].description[0].description.toCamelCase()
-        )
+        temperature.text = root.context.getString(R.string.current_temp, data.temp.toString())
         progressBar.fadeTo(false)
     }
 }

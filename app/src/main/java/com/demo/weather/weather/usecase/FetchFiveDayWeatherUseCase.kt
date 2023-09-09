@@ -6,5 +6,5 @@ import javax.inject.Inject
 class FetchFiveDayWeatherUseCase @Inject constructor(
     private val repository: WeatherRepository
 ) {
-    operator fun invoke(lat: Long, lng: Long) = repository.fetch(lat, lng)
+    operator fun invoke(lat: Long, lng: Long) = repository.fetchClosest(lat, lng)
 }
