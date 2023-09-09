@@ -12,5 +12,6 @@ data class Weather(
     val temp: Int? = 0,
     val rain : Int? = 0,
     val wind: Int? = 0,
-    val icon: Int? = R.drawable.cloud
+    val icon: Int? = R.drawable.cloud,
+    val suggestion: String? = "beach_access/v12/24px.svg"
 )

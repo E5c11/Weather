@@ -10,22 +10,14 @@
     tools:context="com.demo.weather.weather.ui.WeatherFragment"
     app:layoutDescription="@xml/weather_fragment_scene">
 
-    <androidx.appcompat.widget.SearchView
-        android:id="@+id/search"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="@id/top_guideline"
-        app:layout_constraintStart_toStartOf="@id/start_guideline"
-        app:layout_constraintEnd_toStartOf="@id/map"/>
-
     <ImageView
         android:id="@+id/map"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:src="@drawable/map_24"
-        app:layout_constraintTop_toTopOf="@id/search"
-        app:layout_constraintBottom_toBottomOf="@id/search"
+        app:layout_constraintTop_toTopOf="@id/top_guideline"
         app:layout_constraintEnd_toEndOf="@id/end_guideline"
+        app:layout_constraintWidth_percent="0.1"
         app:layout_constraintDimensionRatio="1:1"/>
 
     <androidx.constraintlayout.widget.Guideline
@@ -64,7 +56,7 @@
         android:textSize="@dimen/header_text"
         android:textColor="@color/white"
         android:visibility="gone"
-        app:layout_constraintTop_toBottomOf="@id/search"
+        app:layout_constraintTop_toBottomOf="@id/map"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@id/icon"
@@ -76,6 +68,7 @@
         android:layout_width="@dimen/icon_width"
         android:layout_height="@dimen/icon_width"
         android:visibility="gone"
+        app:layout_constraintVertical_chainStyle="packed"
         app:layout_constraintTop_toBottomOf="@id/location"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -95,22 +88,35 @@
         app:layout_constraintTop_toBottomOf="@id/icon"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/description"
+        app:layout_constraintBottom_toTopOf="@id/suggestion"
         tools:text="16°"
         tools:visibility="visible"/>
 
     <TextView
-        android:id="@+id/description"
+        android:id="@+id/suggestion"
         style="@style/DefaultTextViewStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/white"
-        android:textSize="@dimen/medium_large_text"
+        android:textSize="@dimen/large_test"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="@id/suggestion_image"
+        app:layout_constraintStart_toStartOf="@id/start_guideline"
+        app:layout_constraintEnd_toStartOf="@id/suggestion_image"
+        app:layout_constraintBottom_toBottomOf="@id/suggestion_image"
+        android:text="@string/best_for"
+        tools:visibility="visible"/>
+
+    <ImageView
+        android:id="@+id/suggestion_image"
+        android:layout_width="@dimen/icon_half_width"
+        android:layout_height="@dimen/icon_half_width"
+        android:src="@drawable/sun"
         android:visibility="gone"
         app:layout_constraintTop_toBottomOf="@id/temperature"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        tools:text="Partly Cloudy 22° / 16°"
+        app:layout_constraintBottom_toBottomOf="@id/current_weather_sep"
+        app:layout_constraintStart_toEndOf="@id/suggestion"
+        app:layout_constraintEnd_toEndOf="@id/end_guideline"
         tools:visibility="visible"/>
 
     <ProgressBar
@@ -119,9 +125,10 @@
         android:layout_height="wrap_content"
         android:visibility="visible"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="@id/current_weather_sep"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:visibility="gone"/>
 
     <View
         android:id="@+id/current_weather_sep"
@@ -130,20 +137,21 @@
         android:background="@color/card_bg"
         android:layout_marginTop="@dimen/spacing_medium"
         android:layout_marginBottom="@dimen/spacing_medium"
-        app:layout_constraintTop_toBottomOf="@id/description"
+        app:layout_constraintTop_toBottomOf="@id/suggestion_image"
         app:layout_constraintStart_toStartOf="@id/start_guideline"
-        app:layout_constraintEnd_toEndOf="@id/end_guideline"
-        app:layout_constraintBottom_toTopOf="@id/five_day_component"/>
+        app:layout_constraintEnd_toEndOf="@id/end_guideline"/>
 
-    <include
-        android:id="@+id/five_day_component"
-        layout="@layout/five_day_component"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/listview"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="@dimen/spacing_medium"
-        app:layout_constraintStart_toEndOf="@id/start_guideline"
-        app:layout_constraintEnd_toStartOf="@id/end_guideline"
+        android:layout_marginTop="@dimen/spacing_small"
+        android:visibility="gone"
+        tools:listitem="@layout/hourly_item"
         app:layout_constraintTop_toBottomOf="@id/current_weather_sep"
-        app:layout_constraintBottom_toTopOf="@id/bottom_guideline"/>
+        app:layout_constraintStart_toStartOf="@id/start_guideline"
+        app:layout_constraintEnd_toEndOf="@id/end_guideline"
+        app:layout_constraintBottom_toBottomOf="@id/bottom_guideline"
+        tools:visibility="visible"/>
 
 </androidx.constraintlayout.motion.widget.MotionLayout>

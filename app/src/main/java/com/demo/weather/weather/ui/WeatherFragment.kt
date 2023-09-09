@@ -33,7 +33,7 @@ class WeatherFragment: Fragment(R.layout.weather_fragment) {
         binding = WeatherFragmentBinding.bind(view)
 
         hourlyComponent = HourlyComponent(
-            this, hourlyViewModel, binding.fiveDayComponent,
+            this, hourlyViewModel, binding,
             updateCurrentWeather = {
                 currentWeatherComponent.updateWeather(it)
             },

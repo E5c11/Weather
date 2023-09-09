@@ -44,6 +44,15 @@ fun Int.weatherIcon(): Int = when (this) {
     else -> R.drawable.cloud
 }
 
+fun Int.suggestionPath(): String = when (this) {
+    in 1..2 -> "beach_access/v12/24px.svg"
+    in 3..6 -> "live_tv/v11/24px.svg"
+    in 7..13, in 17..22 -> "night_shelter/v6/24px.svg"
+    in 14..16 -> "downhill_skiing/v4/24px.svg"
+    in 23..27 -> "headset/v12/24px.svg"
+    else -> "live_tv/v11/24px.svg"
+}
+
 fun getDate(date: Int = 0): String {
     val calendar = Calendar.getInstance()
     calendar.add(Calendar.DAY_OF_YEAR, date)

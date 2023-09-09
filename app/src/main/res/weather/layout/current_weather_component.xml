@@ -46,12 +46,12 @@
         app:layout_constraintTop_toBottomOf="@id/icon"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/description"
+        app:layout_constraintBottom_toTopOf="@id/suggestion"
         tools:text="16°"
         tools:visibility="visible"/>
 
     <TextView
-        android:id="@+id/description"
+        android:id="@+id/suggestion"
         style="@style/DefaultTextViewStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
