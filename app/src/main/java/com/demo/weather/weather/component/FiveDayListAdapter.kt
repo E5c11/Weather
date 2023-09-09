@@ -11,7 +11,6 @@ import com.demo.weather.R
 import com.demo.weather.common.helper.getDayOfWeek
 import com.demo.weather.common.helper.toCamelCase
 import com.demo.weather.databinding.FiveDayItemBinding
-import com.demo.weather.weather.data.Weather
 import com.demo.weather.weather.helper.WeatherConstants.BASE_URL
 import com.demo.weather.weather.helper.WeatherConstants.STORAGE_URL
 

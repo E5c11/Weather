@@ -13,7 +13,7 @@ import com.demo.weather.databinding.WeatherFragmentBinding
 import com.demo.weather.location.viewmodel.LocationViewModel
 import com.demo.weather.weather.component.CurrentWeatherComponent
 import com.demo.weather.weather.component.HourlyComponent
-import com.demo.weather.weather.io.LocationPermissionDeniedException
+import com.demo.weather.weather.data.exception.LocationPermissionDeniedException
 import com.demo.weather.weather.viewmodel.HourlyViewModel
 import dagger.hilt.android.AndroidEntryPoint
 

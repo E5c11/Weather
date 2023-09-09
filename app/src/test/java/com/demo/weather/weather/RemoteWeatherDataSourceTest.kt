@@ -1,10 +1,7 @@
 package com.demo.weather.weather
 
-import com.demo.weather.weather.data.City
-import com.demo.weather.weather.data.entity.FiveDayWeather
-import com.demo.weather.weather.data.Weather
 import com.demo.weather.weather.io.WeatherApi
-import com.demo.weather.weather.io.WeatherFetchException
+import com.demo.weather.weather.data.exception.WeatherFetchException
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.mockk
@@ -38,30 +35,30 @@ class RemoteWeatherDataSourceTest {
     @Test
     fun `A Successful getFiveDayWeather fetch returns FiveDayWeather object`() = runTest {
         val response = Response.success(mockData)
-        coEvery { weatherApi.getFiveDay(any(), any(), any(), any(), any()) } returns response
+        coEvery { weatherApi.getHourly(any(), any(), any(), any(), any()) } returns response
 
         datasource.getFiveDayWeather(123L, 321L).shouldBeEqualTo(mockData)
 
-        coVerify(exactly = 1) { weatherApi.getFiveDay(any(), any(), any(), any(), any()) }
+        coVerify(exactly = 1) { weatherApi.getHourly(any(), any(), any(), any(), any()) }
     }
 
     @Test
     fun `A Failed getFiveDayWeather fetch throws WeatherFetchException`() = runTest {
 
-        coEvery { weatherApi.getFiveDay(any(), any(), any(), any(), any()) } throws IOException()
+        coEvery { weatherApi.getHourly(any(), any(), any(), any(), any()) } throws IOException()
 
         assertFailsWith<WeatherFetchException> { datasource.getFiveDayWeather(123L, 321L) }
 
-        coVerify(exactly = 1) { weatherApi.getFiveDay(any(), any(), any(), any(), any()) }
+        coVerify(exactly = 1) { weatherApi.getHourly(any(), any(), any(), any(), any()) }
     }
 
     @Test
     fun `A Failed getFiveDayWeather fetch returns a Exception from the API`() = runTest {
         val response = Response.error<FiveDayWeather>(401, "".toResponseBody(null))
-        coEvery { weatherApi.getFiveDay(any(), any(), any(), any(), any()) } returns response
+        coEvery { weatherApi.getHourly(any(), any(), any(), any(), any()) } returns response
 
         assertFailsWith<WeatherFetchException> { datasource.getFiveDayWeather(123L, 321L) }
 
-        coVerify(exactly = 1) { weatherApi.getFiveDay(any(), any(), any(), any(), any()) }
+        coVerify(exactly = 1) { weatherApi.getHourly(any(), any(), any(), any(), any()) }
     }
 }

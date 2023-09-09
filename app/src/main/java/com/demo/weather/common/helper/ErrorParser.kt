@@ -9,8 +9,8 @@ import com.demo.weather.R
 import com.demo.weather.common.data.ErrorState
 import com.demo.weather.common.io.ActionableException
 import com.demo.weather.location.data.exception.LocationNotFoundException
-import com.demo.weather.weather.io.LocationPermissionDeniedException
-import com.demo.weather.weather.io.WeatherFetchException
+import com.demo.weather.weather.data.exception.LocationPermissionDeniedException
+import com.demo.weather.weather.data.exception.WeatherFetchException
 import javax.inject.Inject
 
 class ErrorParser @Inject constructor(private val context: Context) {

@@ -4,7 +4,7 @@ import android.util.Log
 import com.demo.weather.common.helper.Constant.LOADING
 import com.demo.weather.common.helper.Resource
 import com.demo.weather.weather.helper.FiveDayFlow
-import com.demo.weather.weather.io.WeatherFetchException
+import com.demo.weather.weather.data.exception.WeatherFetchException
 import kotlinx.coroutines.flow.flow
 
 class WeatherRepository(

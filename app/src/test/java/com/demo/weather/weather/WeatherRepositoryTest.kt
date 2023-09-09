@@ -4,9 +4,6 @@ import app.cash.turbine.test
 import com.demo.weather.common.helper.Constant.LOADING
 import com.demo.weather.common.helper.Resource
 import com.demo.weather.common.io.ActionableException
-import com.demo.weather.weather.data.City
-import com.demo.weather.weather.data.entity.FiveDayWeather
-import com.demo.weather.weather.data.Weather
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.mockk

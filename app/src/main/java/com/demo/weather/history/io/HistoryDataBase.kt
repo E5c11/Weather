@@ -2,7 +2,6 @@ package com.demo.weather.history.io
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import com.demo.weather.weather.data.entity.FiveDayWeather
 
 @Database(entities = [FiveDayWeather::class], version = 1)
 abstract class HistoryDataBase: RoomDatabase() {
