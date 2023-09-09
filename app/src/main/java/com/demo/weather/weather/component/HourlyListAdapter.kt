@@ -5,17 +5,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.demo.weather.R
-import com.demo.weather.common.helper.getDayOfWeek
-import com.demo.weather.common.helper.toCamelCase
 import com.demo.weather.databinding.FiveDayItemBinding
-import com.demo.weather.weather.data.hourly.HourData
-import com.demo.weather.weather.data.hourly.Hourly
-import com.demo.weather.weather.helper.WeatherConstants.STORAGE_URL
+import com.demo.weather.weather.data.hourly.Weather
 
-class HourlyListAdapter: ListAdapter<HourData, HourlyListAdapter.ViewHolder>(
+class HourlyListAdapter: ListAdapter<Weather, HourlyListAdapter.ViewHolder>(
     DiffCallback()
 ) {
 
@@ -33,7 +27,7 @@ class HourlyListAdapter: ListAdapter<HourData, HourlyListAdapter.ViewHolder>(
         private val binding: FiveDayItemBinding
     ): RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(data: HourData) {
+        fun bind(data: Weather) {
             binding.apply {
                 day.text = data.time
                 icon.setImageResource(data.icon ?: R.drawable.cloud)
@@ -46,11 +40,11 @@ class HourlyListAdapter: ListAdapter<HourData, HourlyListAdapter.ViewHolder>(
         }
     }
 
-    class DiffCallback : DiffUtil.ItemCallback<HourData>() {
-        override fun areItemsTheSame(oldItem: HourData, newItem: HourData) =
+    class DiffCallback : DiffUtil.ItemCallback<Weather>() {
+        override fun areItemsTheSame(oldItem: Weather, newItem: Weather) =
             (oldItem.time == newItem.time && oldItem.temp == newItem.temp)
 
-        override fun areContentsTheSame(oldItem: HourData, newItem: HourData) =
+        override fun areContentsTheSame(oldItem: Weather, newItem: Weather) =
             oldItem == newItem
     }
 

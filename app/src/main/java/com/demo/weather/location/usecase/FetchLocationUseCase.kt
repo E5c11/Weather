@@ -1,4 +1,4 @@
-package com.demo.weather.weather.usecase
+package com.demo.weather.location.usecase
 
 import com.demo.weather.location.LocationRepository
 import javax.inject.Inject

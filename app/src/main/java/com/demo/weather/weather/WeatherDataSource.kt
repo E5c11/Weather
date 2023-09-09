@@ -1,11 +1,12 @@
 package com.demo.weather.weather
 
-import com.demo.weather.weather.data.daily.DailyDto
-import com.demo.weather.weather.data.hourly.Hourly
-import com.demo.weather.weather.data.stations.Stations
+import com.demo.weather.weather.data.hourly.Weather
+import com.demo.weather.weather.data.stations.StationsDto
+import com.demo.weather.weather.io.Frequency
+import com.google.android.gms.maps.model.LatLng
 
 interface WeatherDataSource {
-    suspend fun getStations(lat: Long, lng: Long): Stations
-    suspend fun getHourly(key: String, name: String): Hourly
-    suspend fun getDaily(key: String, name: String): DailyDto
+    suspend fun getStations(lat: Double, lng: Double): StationsDto
+    suspend fun getWeather(key: String, name: String, latLng: LatLng, frequency: Frequency): List<Weather>
+    suspend fun getCurrentWeather(key: String, name: String, latLng: LatLng, frequency: Frequency): Weather
 }

@@ -1,6 +1,7 @@
 package com.demo.weather.weather.usecase
 
 import com.demo.weather.location.LocationRepository
+import com.demo.weather.location.usecase.FetchLocationUseCase
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify

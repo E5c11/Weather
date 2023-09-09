@@ -1,7 +1,7 @@
 package com.demo.weather.weather.viewmodel
 
 import com.demo.weather.location.viewmodel.LocationViewModel
-import com.demo.weather.weather.usecase.FetchLocationUseCase
+import com.demo.weather.location.usecase.FetchLocationUseCase
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify

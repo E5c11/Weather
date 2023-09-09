@@ -10,10 +10,10 @@ import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 
 @RunWith(JUnit4::class)
-class FetchFiveDayWeatherUseCaseTest {
+class WeatherWeatherUseCaseTest {
     private val repository: WeatherRepository = mockk()
 
-    private val useCase = FetchFiveDayWeatherUseCase(repository)
+    private val useCase = HourlyWeatherUseCase(repository)
 
     @Test
     fun `FetchFiveDayWeatherUseCase should only be called once`() {

@@ -1,18 +1,14 @@
 package com.demo.weather.weather.component
 
 import androidx.lifecycle.LifecycleOwner
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.demo.weather.R
 import com.demo.weather.common.helper.collectIn
 import com.demo.weather.common.helper.fadeTo
-import com.demo.weather.common.helper.toCamelCase
 import com.demo.weather.common.io.ActionableException
 import com.demo.weather.databinding.WeatherFragmentBinding
 import com.demo.weather.location.data.Location
 import com.demo.weather.location.viewmodel.LocationViewModel
-import com.demo.weather.weather.data.hourly.HourData
-import com.demo.weather.weather.helper.WeatherConstants.STORAGE_URL
+import com.demo.weather.weather.data.hourly.Weather
 
 class CurrentWeatherComponent constructor(
     private val lifecycleOwner: LifecycleOwner,
@@ -33,7 +29,7 @@ class CurrentWeatherComponent constructor(
         }
     }
 
-    fun updateWeather(data: HourData) = binding.apply {
+    fun updateWeather(data: Weather) = binding.apply {
         location.fadeTo(true)
         location.text = data.station
         icon.fadeTo(true)
