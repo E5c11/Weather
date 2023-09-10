@@ -44,7 +44,8 @@ class ErrorFragment: DialogFragment() {
             negativeBtn.fadeTo(true)
             negativeBtn.text = state.negTitle
             negativeBtn.setOnClickListener {
-                findNavController().popBackStack()
+                if (state.intent == null && state.navigate != null) findNavController().navigate(state.navigate)
+                else findNavController().popBackStack()
             }
         }
     }

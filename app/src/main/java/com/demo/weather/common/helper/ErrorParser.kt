@@ -34,7 +34,8 @@ class ErrorParser @Inject constructor(private val context: Context) {
             intent = Intent().also {
                 it.action = Settings.ACTION_APPLICATION_DETAILS_SETTINGS
                 it.data = Uri.parse("package:" + BuildConfig.APPLICATION_ID)
-            }
+            },
+            navigate = error.navigate
         )
         is WeatherNotFoundAtLocationException -> ErrorState(
             msg = error.msg,
