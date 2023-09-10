@@ -3,7 +3,6 @@ package com.demo.weather.common.ui
 import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
 import androidx.navigation.fragment.findNavController
@@ -21,17 +20,13 @@ class ErrorFragment: DialogFragment() {
     lateinit var errorParser: ErrorParser
 
     private lateinit var binding: ErrorFragmentBinding
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = ErrorFragmentBinding.inflate(layoutInflater)
-        val args = ErrorFragmentArgs.fromBundle(requireArguments())
-        setup(args)
-    }
+    private lateinit var args: ErrorFragmentArgs
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        val args = ErrorFragmentArgs.fromBundle(requireArguments())
-        return dialogSetup(args)
+        binding = ErrorFragmentBinding.inflate(layoutInflater)
+        args = ErrorFragmentArgs.fromBundle(requireArguments())
+        setup(args)
+        return dialogSetup()
     }
 
     private fun setup(args: ErrorFragmentArgs) = binding.apply {
@@ -53,11 +48,8 @@ class ErrorFragment: DialogFragment() {
         }
     }
 
-    private fun dialogSetup(args: ErrorFragmentArgs) = AlertDialog.Builder(
-        requireContext(), androidx.appcompat.R.style.AlertDialog_AppCompat_Light
-    ).apply {
+    private fun dialogSetup() = AlertDialog.Builder(requireContext()).apply {
         setView(binding.root)
-        setup(args)
     }.create()
 
     private fun startPermissionIntent(intent: Intent) {
