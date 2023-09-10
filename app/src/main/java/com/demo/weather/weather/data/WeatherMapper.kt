@@ -13,7 +13,7 @@ fun WeatherDto.toHourly(name: String, latLng: LatLng): List<Weather> = this.data
     Weather(
         station = name.split("/")[0],
         latlng = latLng,
-        time = it.time?.toHour(),
+        time = it.time,
         temp = it.temp?.toInt(),
         rain = it.prcp?.toInt(),
         wind = it.wspd?.toInt(),

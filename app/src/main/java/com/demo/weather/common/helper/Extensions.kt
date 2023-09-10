@@ -88,3 +88,17 @@ fun String.toDay(): String {
         ""
     }
 }
+
+fun String.toDayOfTheWeek(): String {
+    val inputFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
+    val outputFormat = SimpleDateFormat("EEE", Locale.getDefault())
+    return try {
+        val date = inputFormat.parse(this)
+        if (date == null) ""
+        else {
+            outputFormat.format(date)
+        }
+    } catch (e: Exception) {
+        ""
+    }
+}
