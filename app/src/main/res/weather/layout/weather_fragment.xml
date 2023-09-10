@@ -57,15 +57,13 @@
         android:id="@+id/icon"
         android:layout_width="@dimen/icon_width"
         android:layout_height="@dimen/icon_width"
-        android:visibility="gone"
         app:layout_constraintVertical_chainStyle="packed"
         app:layout_constraintTop_toBottomOf="@id/location"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@id/temperature"
-        tools:src="@drawable/example_icon"
-        android:contentDescription="@string/icon_description"
-        tools:visibility="visible"/>
+        android:src="@drawable/load_24"
+        android:contentDescription="@string/icon_description"/>
 
     <TextView
         android:id="@+id/temperature"
@@ -101,7 +99,7 @@
         android:id="@+id/suggestion_image"
         android:layout_width="@dimen/icon_half_width"
         android:layout_height="@dimen/icon_half_width"
-        android:visibility="gone"
+        android:src="@drawable/load_24"
         app:layout_constraintTop_toBottomOf="@id/temperature"
         app:layout_constraintBottom_toBottomOf="@id/current_weather_sep"
         app:layout_constraintStart_toEndOf="@id/suggestion"

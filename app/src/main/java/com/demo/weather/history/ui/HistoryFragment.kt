@@ -32,11 +32,10 @@ class HistoryFragment: Fragment(R.layout.history_fragment) {
             recyclerView.adapter = historyAdapter
             recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
-            Log.d("myT", "onViewCreated: ")
             viewModel.getRecentLocationsWeather().collectIn(viewLifecycleOwner) {
-                Log.d("myT", "onViewCreated: $it")
                 emptyText.fadeTo(Resource.Status.LOADING == it.status || Resource.Status.ERROR == it.status)
                 recyclerView.fadeTo(Resource.Status.SUCCESS == it.status)
+                progressBar.fadeTo(Resource.Status.LOADING == it.status)
                 historyAdapter.submitList(it.data)
             }
         }

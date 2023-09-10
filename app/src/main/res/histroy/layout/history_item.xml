@@ -28,7 +28,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/day"
         app:layout_constraintBottom_toBottomOf="parent"
-        tools:src="@drawable/example_icon"
+        android:src="@drawable/load_24"
         android:contentDescription="@string/icon_description" />
 
     <TextView
