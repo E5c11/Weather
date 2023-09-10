@@ -13,4 +13,5 @@
     <color name="text_sub_header">#154F9E</color>
     <color name="text_disabled_dark">#4dffffff</color>
     <color name="edit_text_field_dark">#b3ffffff</color>
+    <color name="blue_03">#55154F9E</color>
 </resources>

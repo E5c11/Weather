@@ -15,4 +15,8 @@
     <string name="open_setting">Open Settings</string>
 
     <string name="okay">Okay</string>
+
+    <string name="recent">Recent</string>
+    <string name="home">Home</string>
+    <string name="map">Map</string>
 </resources>

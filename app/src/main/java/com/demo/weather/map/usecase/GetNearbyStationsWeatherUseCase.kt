@@ -14,7 +14,7 @@ class GetNearbyStationsWeatherUseCase(private val repository: WeatherRepository)
         try {
             val stations = repository.fetchNearbyStations(lat, lng)
             stations.forEach { station ->
-                delay(1000) //This is due to API call limit
+                delay(500) //This is due to API call limit
                 repository.fetchCurrentWeather(
                     station.id, station.name, LatLng(lat, lng), Frequency.DAILY
                 ).collect { resource ->

@@ -1,9 +1,9 @@
 package com.demo.weather.location
 
-import android.location.Location
 import app.cash.turbine.test
 import com.demo.weather.common.helper.Constant.FINDING_LOCATION
 import com.demo.weather.common.helper.Resource
+import com.demo.weather.location.data.Location
 import com.demo.weather.location.data.exception.LocationFetchException
 import com.demo.weather.location.data.exception.LocationNotFoundException
 import com.demo.weather.location.io.LocationDataSource

@@ -106,12 +106,9 @@ class MapFragment: Fragment(R.layout.map_fragment), OnMapReadyCallback {
     }
 
     private fun getLocation() {
-        val loc = MapFragmentArgs.fromBundle(requireArguments()).location
-        if (loc == null) {
-            locationViewModel.obtainLocation().collectIn(viewLifecycleOwner) { resource ->
-                resource.data?.animateToLocation()
-            }
-        } else location = Location(loc.latitude, loc.longitude, loc.accuracy)
+        locationViewModel.obtainLocation().collectIn(viewLifecycleOwner) { resource ->
+            resource.data?.animateToLocation()
+        }
     }
 
     override fun onResume() {

@@ -9,7 +9,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintVertical_chainStyle="packed"
-            app:layout_constraintTop_toBottomOf="@id/map"
+            app:layout_constraintTop_toBottomOf="@id/top_guideline"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toTopOf="@id/icon"/>
@@ -51,6 +51,8 @@
             app:layout_constraintEnd_toEndOf="@id/end_guideline"/>
         <Constraint
             android:id="@+id/progress_bar"
+            android:layout_width="@dimen/icon_width"
+            android:layout_height="@dimen/icon_width"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -74,7 +76,7 @@
             android:id="@+id/temperature"
             android:layout_width="@dimen/icon_half_width"
             android:layout_height="@dimen/icon_half_width"
-            app:layout_constraintTop_toBottomOf="@id/map"
+            app:layout_constraintTop_toBottomOf="@id/top_guideline"
             app:layout_constraintStart_toStartOf="@id/start_guideline"
             app:layout_constraintEnd_toStartOf="@id/icon">
             <CustomAttribute

@@ -55,12 +55,6 @@ class WeatherFragment: Fragment(R.layout.weather_fragment) {
         )
 
         requestLocation()
-
-        binding.map.setOnClickListener {
-            findNavController().navigate(
-                WeatherFragmentDirections.actionWeatherFragmentToMapFragment(locationViewModel.getLocation())
-            )
-        }
     }
 
     private fun requestLocation() {
