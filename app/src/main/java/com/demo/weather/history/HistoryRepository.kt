@@ -33,9 +33,11 @@ class HistoryRepository(private val local: WeatherHistoryDataSource) {
         }
     }
 
-    suspend fun save(weather: List<Weather>) = try {
-        local.insert(weather)
-    } catch (e: Exception) {
-        Log.e("WEATHER_HISTORY", "CACHE-ERROR: Could not save recent weather", e)
+    suspend fun save(weather: List<Weather>) {
+        try {
+            local.insert(weather)
+        } catch (e: Exception) {
+            Log.e("WEATHER_HISTORY", "CACHE-ERROR: Could not save recent weather", e)
+        }
     }
 }

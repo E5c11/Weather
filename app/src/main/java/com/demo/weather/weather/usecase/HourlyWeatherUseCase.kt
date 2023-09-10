@@ -33,7 +33,7 @@ class HourlyWeatherUseCase(
         } catch (e: WeatherFetchException) {
             emit(Resource.error(e))
         } catch (e: Exception) {
-            emit(Resource.error(ActionableException(error = e)))
+            emit(Resource.error(WeatherFetchException(error = e)))
         }
     }
 }

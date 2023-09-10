@@ -20,7 +20,7 @@ class WeatherViewModel @Inject constructor(
 
     fun getWeather(lat: Double, lng: Double) = hourlyWeatherUseCase(lat, lng)
 
-    suspend fun saveWeather(weather: List<Weather>) = viewModelScope.launch {
+    fun saveWeather(weather: List<Weather>) = viewModelScope.launch {
         saveWeatherUseCase(weather)
     }
 }

@@ -24,7 +24,7 @@ interface WeatherApi {
         "x-rapidapi-host: meteostat.p.rapidapi.com"
     )
     @GET("stations/hourly")
-    suspend fun getHourly(
+    suspend fun getWeather(
         @Query("station") station: String,
         @Query("start") start: String,
         @Query("end") end: String,

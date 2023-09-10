@@ -27,7 +27,7 @@ class RemoteWeatherDataSource @Inject constructor(
     override suspend fun getWeather(
         key: String, name: String, latLng: LatLng, frequency: Frequency
     ): List<Weather> = try {
-        val result = weatherApi.getHourly(key, getDate().toDay(), getDate(1).toDay(), frequency.value)
+        val result = weatherApi.getWeather(key, getDate().toDay(), getDate(1).toDay(), frequency.value)
         val body = result.body()
         if (result.isSuccessful && body != null) body.toHourly(name, latLng)
         else throw WeatherFetchException()
@@ -41,7 +41,7 @@ class RemoteWeatherDataSource @Inject constructor(
         key: String, name: String, latLng: LatLng, frequency: Frequency
     ): Weather = try {
         val today = getDate().toDay()
-        val result = weatherApi.getHourly(key, today, today, frequency.value)
+        val result = weatherApi.getWeather(key, today, today, frequency.value)
         val body = result.body()
         if (result.isSuccessful && body != null) body.toHourly(name, latLng)[0]
         else throw WeatherFetchException()
