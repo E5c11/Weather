@@ -5,15 +5,13 @@ Please add
 API_KEY = "{api_key}"
 to local.properties to build the app
 
-What would I add:
-1. UI tests, I believe tests help us to make sure our work is clean. It also gives you the freedom to change things in your code and know when you have broken something
-2. Better error handling, good error handling ensures less app crashes and a great user experience
-3. gradle, Gradle is the source of many sleepless nights, so having a clean and well formed gradle makes a devs life easier
+This app consists of three screens
 
-What did I focus on:
-1. architecture, Having a good architecture ensures a scalable app and a clean codebase. Making sure the whole team can work on areas they did not code
-2. dependency injection, Making sure everything is injected allows your to confidently mock for tests, as well as removing boilerplate code and initialisation
-3. Seperation of concerns, This is fundemental when keeping a clean codebase. If everything is separated it it easy to maintain a big codebase
+Home/Weather:
+Gets the current weather depending on your location
 
-What I did not focus on:
-1. Design and UI, I am not a designer and suck at it. As long as there are clear cut designs I am able to implement them
+Map:
+Uses the centre of the map location and finds nearby stations and displays the temperature on the map
+
+History:
+Displays the current weather from local storage of all previously searched locations, if the information is still relevant
