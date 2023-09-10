@@ -8,8 +8,8 @@ import com.demo.weather.history.data.WeatherEntity
 
 @Database(entities = [WeatherEntity::class], version = 1, exportSchema = false)
 @TypeConverters(Converters::class)
-abstract class HistoryDataBase: RoomDatabase() {
-    abstract fun fiveDayHistoryDao(): WeatherHistoryDao
+abstract class HistoryDatabase: RoomDatabase() {
+    abstract fun weatherHistoryDao(): WeatherHistoryDao
 
     companion object {
         const val DB_NAME = "history_db"

@@ -14,7 +14,7 @@ class WeatherDtoViewModelTest {
 
     private val useCase: HourlyWeatherUseCase = mockk()
 
-    private val viewModel = HourlyViewModel(useCase)
+    private val viewModel = WeatherViewModel(useCase)
 
     @Test
     fun `obtainLocation should only be called once`() {

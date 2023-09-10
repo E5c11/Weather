@@ -14,7 +14,7 @@ import com.demo.weather.location.viewmodel.LocationViewModel
 import com.demo.weather.weather.component.CurrentWeatherComponent
 import com.demo.weather.weather.component.HourlyComponent
 import com.demo.weather.weather.data.exception.LocationPermissionDeniedException
-import com.demo.weather.weather.viewmodel.HourlyViewModel
+import com.demo.weather.weather.viewmodel.WeatherViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -26,16 +26,17 @@ class WeatherFragment: Fragment(R.layout.weather_fragment) {
     private lateinit var hourlyComponent: HourlyComponent
 
     private val locationViewModel: LocationViewModel by viewModels()
-    private val hourlyViewModel: HourlyViewModel by viewModels()
+    private val weatherViewModel: WeatherViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = WeatherFragmentBinding.bind(view)
 
         hourlyComponent = HourlyComponent(
-            this, hourlyViewModel, binding,
+            this, weatherViewModel, binding,
             updateCurrentWeather = {
                 currentWeatherComponent.updateWeather(it)
+
             },
             displayError = {
                 findNavController()

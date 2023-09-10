@@ -10,7 +10,7 @@ import com.google.android.gms.maps.model.LatLng
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
-class HourlyWeatherUseCase @Inject constructor(
+class HourlyWeatherUseCase(
     private val repository: WeatherRepository
 ) {
     operator fun invoke(lat: Double, lng: Double): WeatherListFlow = flow {
