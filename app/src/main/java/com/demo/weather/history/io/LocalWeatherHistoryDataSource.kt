@@ -1,5 +1,6 @@
 package com.demo.weather.history.io
 
+import com.demo.weather.history.data.exception.HistoryFetchException
 import com.demo.weather.history.data.exception.InsertWeatherHistoryException
 import com.demo.weather.history.data.toEntity
 import com.demo.weather.history.data.toList
@@ -16,7 +17,11 @@ class LocalWeatherHistoryDataSource(private val dao: WeatherHistoryDao): Weather
 
     override suspend fun fetchByStation(station: String): List<Weather>? = dao.fetchByStation(station)?.weather
 
-    override fun fetchAll(): Flow<List<List<Weather>>> = dao.fetchAll().map { entities ->
-        entities.map { it.toList() }
+    override fun fetchAll(): Flow<List<List<Weather>>> = try {
+        dao.fetchAll().map { entities ->
+            entities.map { it.toList() }
+        }
+    } catch (e: Exception) {
+        throw HistoryFetchException(error = e)
     }
 }

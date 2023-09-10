@@ -8,5 +8,6 @@ data class ErrorState(
     val icon: Int? = null,
     val posTitle: String? = null,
     val negTitle: String? = null,
-    val intent: Intent? = null
+    val intent: Intent? = null,
+    val navigate: Int? = null
 )

@@ -83,12 +83,7 @@ class WeatherFragment: Fragment(R.layout.weather_fragment) {
     private val requestPermission =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
             if (isGranted) currentWeatherComponent.obtainLocation()
-            else findNavController()
-                .navigate(
-                    WeatherFragmentDirections.actionGlobalErrorFragment(
-                        LocationPermissionDeniedException()
-                    )
-                )
+            else LocationPermissionDeniedException().showError()
         }
 
     private fun askPermission() {
@@ -122,11 +117,8 @@ class WeatherFragment: Fragment(R.layout.weather_fragment) {
     private val locationSettingsLauncher = registerForActivityResult(
         ActivityResultContracts.StartIntentSenderForResult()
     ) { result ->
-        if (result.resultCode == Activity.RESULT_OK) {
-            requestLocation()
-        } else {
-            ActionableException("Please make sure location services are enabled").showError()
-        }
+        if (result.resultCode == Activity.RESULT_OK) requestLocation()
+        else ActionableException("Please make sure location services are enabled").showError()
     }
 
     private fun ActionableException.showError() =

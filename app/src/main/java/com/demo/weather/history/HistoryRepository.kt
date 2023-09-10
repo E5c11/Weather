@@ -2,6 +2,8 @@ package com.demo.weather.history
 
 import android.util.Log
 import com.demo.weather.common.helper.Resource
+import com.demo.weather.history.data.exception.HistoryFetchException
+import com.demo.weather.history.data.exception.InsertWeatherHistoryException
 import com.demo.weather.history.helper.HistoryFlow
 import com.demo.weather.history.helper.WeatherLocationsListFlow
 import com.demo.weather.history.io.WeatherHistoryDataSource
@@ -15,8 +17,10 @@ class HistoryRepository(private val local: WeatherHistoryDataSource) {
         emit(Resource.loading())
         try {
             local.fetchAll().collect { emit(Resource.success(it)) }
+        } catch (e: HistoryFetchException) {
+            emit(Resource.error(e))
         } catch (e: Exception) {
-            Log.e("WEATHER_HISTORY", "FETCH-ERROR: Could not retrieve recent weather", e)
+            emit(Resource.error(HistoryFetchException(error = e)))
         }
     }
 

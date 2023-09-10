@@ -42,6 +42,7 @@ class CurrentWeatherComponent constructor(
         temperature.fadeTo(true)
         temperature.text = root.context.getString(R.string.current_temp, data.temp.toString())
         progressBar.fadeTo(false)
+        suggestion.text = root.context.getString(R.string.best_for)
         suggestionImage.loadUrl("${MATERIAL_ICON_URL}${data.suggestion}")
     }
 

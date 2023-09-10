@@ -37,7 +37,8 @@ class ErrorFragment: DialogFragment() {
         positiveBtn.setOnClickListener {
             if (state.intent != null) {
                 startPermissionIntent(state.intent)
-            } else findNavController().popBackStack()
+            } else if (state.navigate != null) findNavController().navigate(state.navigate)
+            else findNavController().popBackStack()
         }
         if (state.negTitle != null) {
             negativeBtn.fadeTo(true)

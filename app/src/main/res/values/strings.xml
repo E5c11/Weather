@@ -10,6 +10,9 @@
     <string name="weather_error_title">Weather not found</string>
     <string name="weather_error">The data seems to be missing, please try again later</string>
 
+    <string name="stations_error_title">Stations not found</string>
+    <string name="history_fetch_error_title">History Fetch Error</string>
+
     <string name="location_permission_error_title">Weather is App is unavailable</string>
     <string name="location_permission_error">Weather App requires permission to access your current location, you can turn this function on in settings</string>
     <string name="open_setting">Open Settings</string>
@@ -19,4 +22,9 @@
     <string name="recent">Recent</string>
     <string name="home">Home</string>
     <string name="map">Map</string>
+
+    <string name="go_to_map">Go to Map</string>
+    <string name="go_to_history">Go to Recent</string>
+    <string name="go_to_home">Go to Home</string>
+
 </resources>

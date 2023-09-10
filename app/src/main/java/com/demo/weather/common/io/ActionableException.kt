@@ -7,5 +7,6 @@ import kotlinx.parcelize.Parcelize
 open class ActionableException(
     open var msg: String = "An Error has occurred, please try again later.",
     open var error: Throwable? = null,
-    open var action: String? = null
+    open var action: String? = null,
+    open var navigate: Int? = null
 ) : Exception(msg, error), Parcelable
