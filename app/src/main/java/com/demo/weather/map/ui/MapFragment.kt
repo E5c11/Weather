@@ -1,16 +1,20 @@
 package com.demo.weather.map.ui
 
+import android.Manifest
 import android.annotation.SuppressLint
+import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.location.Geocoder
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.demo.weather.R
 import com.demo.weather.common.helper.collectIn
+import com.demo.weather.common.helper.hasLocationPermission
 import com.demo.weather.databinding.MapFragmentBinding
 import com.demo.weather.databinding.MarkerBinding
 import com.demo.weather.location.data.Location
@@ -43,14 +47,15 @@ class MapFragment: Fragment(R.layout.map_fragment), OnMapReadyCallback {
 
         geocoder = Geocoder(requireContext())
 
-        getLocation()
+        if (requireContext().hasLocationPermission()) getLocation()
     }
 
     @SuppressLint("MissingPermission")
     override fun onMapReady(googleMap: GoogleMap) {
         map = googleMap
         getNearbyWeather()
-        map.isMyLocationEnabled = true
+
+        if (requireContext().hasLocationPermission()) map.isMyLocationEnabled = true
 
         if (this::location.isInitialized) location.animateToLocation()
     }
