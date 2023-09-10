@@ -15,33 +15,27 @@ import javax.inject.Inject
 
 class ErrorParser @Inject constructor(private val context: Context) {
 
-    fun parse(error: ActionableException?): ErrorState {
-        return if (error == null) {
-            ErrorState(msg = context.getString(R.string.general_error), title = context.getString(R.string.general_error_title))
-        } else {
-            when (error) {
-                is LocationNotFoundException -> ErrorState(
-                    msg = context.getString(R.string.location_error),
-                    title = context.getString(R.string.location_error_title)
-                )
-                is WeatherFetchException -> ErrorState(
-                    msg = context.getString(R.string.weather_error),
-                    title = context.getString(R.string.weather_error_title)
-                )
-                is LocationPermissionDeniedException -> ErrorState(
-                    msg = context.getString(R.string.location_permission_error),
-                    title = context.getString(R.string.location_permission_error_title),
-                    posTitle = context.getString(R.string.open_setting),
-                    intent = Intent().also {
-                        it.action = Settings.ACTION_APPLICATION_DETAILS_SETTINGS
-                        it.data = Uri.parse("package:" + BuildConfig.APPLICATION_ID)
-                    }
-                )
-                else -> ErrorState(
-                    msg = context.getString(R.string.general_error),
-                    title = context.getString(R.string.general_error_title)
-                )
+    fun parse(error: ActionableException): ErrorState = when (error) {
+        is LocationNotFoundException -> ErrorState(
+            msg = context.getString(R.string.location_error),
+            title = context.getString(R.string.location_error_title)
+        )
+        is WeatherFetchException -> ErrorState(
+            msg = context.getString(R.string.weather_error),
+            title = context.getString(R.string.weather_error_title)
+        )
+        is LocationPermissionDeniedException -> ErrorState(
+            msg = context.getString(R.string.location_permission_error),
+            title = context.getString(R.string.location_permission_error_title),
+            posTitle = context.getString(R.string.open_setting),
+            intent = Intent().also {
+                it.action = Settings.ACTION_APPLICATION_DETAILS_SETTINGS
+                it.data = Uri.parse("package:" + BuildConfig.APPLICATION_ID)
             }
-        }
+        )
+        else -> ErrorState(
+            msg = error.msg,
+            title = context.getString(R.string.general_error_title)
+        )
     }
 }

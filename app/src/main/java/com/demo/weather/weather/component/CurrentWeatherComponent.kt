@@ -32,7 +32,6 @@ class CurrentWeatherComponent constructor(
                 updateCurrentLocation(it)
             }
         }
-        displayError(ActionableException())
     }
 
     fun updateWeather(data: Weather) = binding.apply {
