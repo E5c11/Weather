@@ -75,6 +75,21 @@ fun String.toHour(): String {
     }
 }
 
+fun String.toDateHour(): String {
+    val inputFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
+    val outputFormat = SimpleDateFormat("yyyy-MM-dd HH", Locale.getDefault())
+    return try {
+        val date = inputFormat.parse(this)
+        if (date == null) ""
+        else {
+            val roundedDate = Date(((date.time + 59  *60*  1000) / (60  *60*  1000) + 1)  *(60*  60 * 1000))
+            outputFormat.format(roundedDate)
+        }
+    } catch (e: Exception) {
+        ""
+    }
+}
+
 fun String.toDay(): String {
     val inputFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
     val outputFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
@@ -102,3 +117,5 @@ fun String.toDayOfTheWeek(): String {
         ""
     }
 }
+
+fun String.matchTime(): Boolean = this.toDateHour() == getDate().toDateHour()

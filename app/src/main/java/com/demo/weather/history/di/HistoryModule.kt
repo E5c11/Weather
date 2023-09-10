@@ -4,6 +4,7 @@ import com.demo.weather.history.HistoryRepository
 import com.demo.weather.history.io.LocalWeatherHistoryDataSource
 import com.demo.weather.history.io.WeatherHistoryDao
 import com.demo.weather.history.io.WeatherHistoryDataSource
+import com.demo.weather.history.usecase.FetchRecentLocationsWeatherUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -21,4 +22,7 @@ object HistoryModule {
     fun providesLocalHistoryDataSource(dao: WeatherHistoryDao): WeatherHistoryDataSource =
         LocalWeatherHistoryDataSource(dao)
 
+    @Provides
+    fun providesFetchWeatherHistoryUseCase(repo: HistoryRepository) =
+        FetchRecentLocationsWeatherUseCase(repo)
 }
