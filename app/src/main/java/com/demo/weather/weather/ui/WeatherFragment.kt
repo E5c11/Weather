@@ -8,6 +8,7 @@ import android.content.IntentSender
 import android.location.LocationManager
 import android.os.Build
 import android.os.Bundle
+import android.os.Parcelable
 import android.util.Log
 import android.view.View
 import androidx.activity.result.IntentSenderRequest
@@ -35,6 +36,9 @@ import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
+const val MOTION_PROGRESS = "motion_progress"
+const val RECYCLER_STATE = "recycler_state"
+
 @AndroidEntryPoint
 class WeatherFragment: Fragment(R.layout.weather_fragment) {
 
@@ -49,6 +53,13 @@ class WeatherFragment: Fragment(R.layout.weather_fragment) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = WeatherFragmentBinding.bind(view)
+
+        if (savedInstanceState != null) {
+            val state = savedInstanceState.getParcelable<Parcelable>(RECYCLER_STATE)
+            binding.listview.layoutManager?.onRestoreInstanceState(state)
+            val progress = savedInstanceState.getFloat(MOTION_PROGRESS)
+            binding.root.progress = progress
+        }
 
         requireContext().isLocationEnabled()
 
@@ -123,5 +134,13 @@ class WeatherFragment: Fragment(R.layout.weather_fragment) {
 
     private fun ActionableException.showError() =
         findNavController().navigate(WeatherFragmentDirections.actionGlobalErrorFragment(this))
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        val layoutManager = binding.listview.layoutManager
+        val state = layoutManager?.onSaveInstanceState()
+        outState.putParcelable(RECYCLER_STATE, state)
+        outState.putFloat(MOTION_PROGRESS, binding.root.progress)
+    }
 
 }
