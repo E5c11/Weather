@@ -12,7 +12,8 @@ import com.google.android.gms.location.LocationResult
 import kotlinx.coroutines.android.asCoroutineDispatcher
 import kotlinx.coroutines.tasks.await
 
-class GoogleLocationService(
+class
+GoogleLocationService(
     private val locationClient: FusedLocationProviderClient,
     private val locationRequest: LocationRequest
 ) : LocationService {

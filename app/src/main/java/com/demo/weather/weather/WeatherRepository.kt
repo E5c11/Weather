@@ -12,9 +12,7 @@ import com.demo.weather.weather.io.WeatherDataSource
 import com.google.android.gms.maps.model.LatLng
 import kotlinx.coroutines.flow.flow
 
-class WeatherRepository(
-    private val dataSource: WeatherDataSource
-) {
+class WeatherRepository(private val dataSource: WeatherDataSource) {
 
     fun fetchWeather(
         stationId: String, stationName: String, latLng: LatLng, frequency: Frequency = Frequency.HOURLY
@@ -45,5 +43,5 @@ class WeatherRepository(
     }
 
     suspend fun fetchNearbyStations(lat: Double, lng: Double): List<Station> =
-        dataSource.getStations(lat, lng).toStation()
+        dataSource.getStations(lat, lng)
 }

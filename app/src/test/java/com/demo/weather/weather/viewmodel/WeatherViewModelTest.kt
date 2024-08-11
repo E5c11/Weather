@@ -36,7 +36,7 @@ class WeatherViewModelTest {
 
         viewModel.getWeather(123.0, 321.0)
 
-        verify(exactly = 1) { hourlyUseCase(any(), any()) }
+        coVerifySequence { hourlyUseCase(any(), any()) }
     }
 
     @Test

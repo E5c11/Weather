@@ -4,23 +4,23 @@ import com.demo.weather.common.helper.getDate
 import com.demo.weather.common.helper.toDay
 import com.demo.weather.weather.data.exception.StationFetchException
 import com.demo.weather.weather.data.exception.WeatherFetchException
+import com.demo.weather.weather.data.stations.Station
 import com.demo.weather.weather.data.weather.Weather
 import com.demo.weather.weather.data.stations.StationsDto
 import com.demo.weather.weather.data.toHourly
+import com.demo.weather.weather.data.toStation
 import com.google.android.gms.maps.model.LatLng
 import javax.inject.Inject
 
 class RemoteWeatherDataSource @Inject constructor(
     private val weatherApi: WeatherApi
 ): WeatherDataSource {
-    override suspend fun getStations(lat: Double, lng: Double): StationsDto = try {
+    override suspend fun getStations(lat: Double, lng: Double): List<Station> = try {
         val result = weatherApi.getStations(lat.toString(), lng.toString())
         val body = result.body()
-        if (result.isSuccessful && body != null) body
+        if (result.isSuccessful && body != null) body.toStation()
         else throw StationFetchException()
-    } catch (e: StationFetchException) {
-        throw e
-    } catch (e: Exception) {
+    }catch (e: Exception) {
         throw StationFetchException(error = e)
     }
 
