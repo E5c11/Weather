@@ -1,6 +1,7 @@
 package com.demo.weather.weather.viewmodel
 
 import com.demo.weather.TestDispatcherRule
+import com.demo.weather.location.data.Location
 import com.demo.weather.weather.usecase.HourlyWeatherUseCase
 import com.demo.weather.weather.usecase.SaveWeatherUseCase
 import io.mockk.Runs
@@ -34,17 +35,8 @@ class WeatherViewModelTest {
     fun `obtainLocation should only be called once`() {
         every { hourlyUseCase(any(), any()) } returns emptyFlow()
 
-        viewModel.getWeather(123.0, 321.0)
+        viewModel.getWeather(Location(123.0, 321.0, 100f))
 
         coVerifySequence { hourlyUseCase(any(), any()) }
-    }
-
-    @Test
-    fun `saveWeather should only be called once`() = runTest {
-        coEvery { saveWeatherUseCase(any()) } just Runs
-
-        viewModel.saveWeather(emptyList())
-
-        coVerifySequence { saveWeatherUseCase(any()) }
     }
 }

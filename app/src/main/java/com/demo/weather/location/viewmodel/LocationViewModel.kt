@@ -21,7 +21,7 @@ class LocationViewModel @Inject constructor(
     val locationState: StateFlow<Resource<Location>> = _locationState
 
     fun obtainLocation() = viewModelScope.launch {
-        fetchLocationUseCase().map {
+        fetchLocationUseCase().collect {
             _locationState.value = it
         }
     }

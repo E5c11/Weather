@@ -30,24 +30,26 @@ GoogleLocationService(
 
     @SuppressLint("MissingPermission")
     override fun startUpdates(duration: Long, location: (Location) -> Unit) {
-        locationCallback = object : LocationCallback() {
-            override fun onLocationResult(locationResult: LocationResult) {
-                for (l in locationResult.locations) {
-                    Log.d("myT", "onLocationResult: ${l.latitude}")
-                    location(Location(l.latitude, l.longitude, l.accuracy))
+        if (!this::locationCallback.isInitialized) {
+            locationCallback = object : LocationCallback() {
+                override fun onLocationResult(locationResult: LocationResult) {
+                    for (l in locationResult.locations) {
+                        location(Location(l.latitude, l.longitude, l.accuracy))
+                    }
                 }
             }
+            locationClient.requestLocationUpdates(
+                locationRequest,
+                locationCallback,
+                dispatcherHandler.looper
+            )
+            Looper.loop()
         }
-        locationClient.requestLocationUpdates(
-            locationRequest,
-            locationCallback,
-            dispatcherHandler.looper
-        )
-        Looper.loop()
     }
 
     override fun stopUpdates() {
         locationClient.removeLocationUpdates(locationCallback)
+        dispatcherHandler.looper.quit()
     }
 
     @SuppressLint("MissingPermission")

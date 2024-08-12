@@ -94,10 +94,11 @@ class WeatherFragment: Fragment(R.layout.weather_fragment) {
             this,
             binding,
             updateLocation = {
+                println("Location updated: $it")
                 weatherViewModel.getWeather(it)
             }
         ).also { component ->
-            component.collectLocation(locationViewModel.locationState.map { Resource.success(it.data) })
+            component.collectLocation(locationViewModel.locationState)
             component.collect(
                 weatherViewModel.weatherState.map { it.isSuccess() },
                 weatherViewModel.weatherState
@@ -109,7 +110,13 @@ class WeatherFragment: Fragment(R.layout.weather_fragment) {
             binding
         ).collect(
             weatherViewModel.weatherState.map { it.isSuccess() },
-            weatherViewModel.weatherState.map { Resource.success(it.data!![0]) }
+            weatherViewModel.weatherState.map {
+                Resource(
+                    it.status,
+                    it.data?.firstOrNull(),
+                    it.error
+                )
+            }
         )
     }
 
