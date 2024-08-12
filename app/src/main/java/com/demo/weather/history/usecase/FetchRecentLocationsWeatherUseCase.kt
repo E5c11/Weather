@@ -16,10 +16,11 @@ class FetchRecentLocationsWeatherUseCase(private val repo: HistoryRepository) {
                     Resource.Status.ERROR -> emit(Resource.error(resource.error))
                     Resource.Status.LOADING -> emit(Resource.loading())
                     Resource.Status.SUCCESS -> {
-                        val mappedList = resource.data!!.map { list ->
-                            list.first { it.time != null && it.time.matchTime() }
+                        val mappedList = resource.data!!.mapNotNull { list ->
+                            list.firstOrNull { it.time != null && it.time.matchTime() }
                         }
-                        emit(Resource.success(mappedList))
+                        if (mappedList.isEmpty()) emit(Resource.error(HistoryFetchException()))
+                        else emit(Resource.success(mappedList))
                     }
                 }
             }

@@ -2,6 +2,7 @@ package com.demo.weather.location.service
 
 import android.annotation.SuppressLint
 import android.os.Handler
+import android.os.HandlerThread
 import android.os.Looper
 import android.util.Log
 import com.demo.weather.location.data.Location
@@ -12,42 +13,41 @@ import com.google.android.gms.location.LocationResult
 import kotlinx.coroutines.android.asCoroutineDispatcher
 import kotlinx.coroutines.tasks.await
 
-class
-GoogleLocationService(
+class GoogleLocationService(
     private val locationClient: FusedLocationProviderClient,
     private val locationRequest: LocationRequest
 ) : LocationService {
+    private lateinit var handlerThread: HandlerThread
     private lateinit var dispatcherHandler: Handler
     private lateinit var locationCallback: LocationCallback
     private var minAccuracy = 100F
 
     override fun setup() {
-        Looper.prepare()
-        dispatcherHandler = Handler(Looper.myLooper()!!).also {
-            it.asCoroutineDispatcher()
-        }
+        handlerThread = HandlerThread("LocationServiceThread").apply { start() }
+        dispatcherHandler = Handler(handlerThread.looper)
     }
 
     @SuppressLint("MissingPermission")
     override fun startUpdates(duration: Long, location: (Location) -> Unit) {
-        locationCallback = object : LocationCallback() {
-            override fun onLocationResult(locationResult: LocationResult) {
-                for (l in locationResult.locations) {
-                    Log.d("myT", "onLocationResult: ${l.latitude}")
-                    location(Location(l.latitude, l.longitude, l.accuracy))
+        if (!this::locationCallback.isInitialized) {
+            locationCallback = object : LocationCallback() {
+                override fun onLocationResult(locationResult: LocationResult) {
+                    for (l in locationResult.locations) {
+                        location(Location(l.latitude, l.longitude, l.accuracy))
+                    }
                 }
             }
+            locationClient.requestLocationUpdates(
+                locationRequest,
+                locationCallback,
+                dispatcherHandler.looper
+            )
         }
-        locationClient.requestLocationUpdates(
-            locationRequest,
-            locationCallback,
-            dispatcherHandler.looper
-        )
-        Looper.loop()
     }
 
     override fun stopUpdates() {
         locationClient.removeLocationUpdates(locationCallback)
+        handlerThread.quitSafely()
     }
 
     @SuppressLint("MissingPermission")

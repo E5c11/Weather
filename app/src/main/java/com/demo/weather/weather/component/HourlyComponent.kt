@@ -6,18 +6,17 @@ import com.demo.weather.common.helper.Resource
 import com.demo.weather.common.helper.collectIn
 import com.demo.weather.common.helper.fadeTo
 import com.demo.weather.common.io.ActionableException
+import com.demo.weather.common.ui.components.BaseComponent
 import com.demo.weather.databinding.WeatherFragmentBinding
 import com.demo.weather.location.data.Location
 import com.demo.weather.weather.data.weather.Weather
-import com.demo.weather.weather.viewmodel.WeatherViewModel
+import kotlinx.coroutines.flow.Flow
 
 class HourlyComponent(
-    private val lifecycleOwner: LifecycleOwner,
-    private val viewModel: WeatherViewModel,
+    lifecycleOwner: LifecycleOwner,
     private val binding: WeatherFragmentBinding,
-    private val updateCurrentWeather: (Weather) -> Unit,
-    private val displayError: (ActionableException) -> Unit
-) {
+    private val updateLocation: (Location) -> Unit
+): BaseComponent<Resource<List<Weather>>>(lifecycleOwner) {
 
     private val weatherAdapter: HourlyListAdapter
 
@@ -29,20 +28,22 @@ class HourlyComponent(
         }
     }
 
-    fun getWeatherWithLocation(location: Location) {
-        viewModel.getWeather(
-            location.latitude!!,
-            location.longitude!!
-        ).collectIn(lifecycleOwner) { resource ->
-            binding.progressBar.fadeTo(Resource.Status.LOADING == resource.status)
-            resource.error?.let {
-                displayError(it)
-            }
+    override fun collect(visibilityFlow: Flow<Boolean>, dataFlow: Flow<Resource<List<Weather>>>) {
+        visibilityFlow.collectIn(owner) {
+            binding.listview.fadeTo(it)
+        }
+
+        dataFlow.collectIn(owner) { resource ->
             resource.data?.let {
                 weatherAdapter.submitList(it)
-                binding.listview.fadeTo(true)
-                updateCurrentWeather(it[0])
-                viewModel.saveWeather(it)
+            }
+        }
+    }
+
+    fun collectLocation(dataFlow: Flow<Resource<Location?>>) {
+        dataFlow.collectIn(owner) { resource ->
+            resource.data?.let {
+                updateLocation(it)
             }
         }
     }

@@ -16,7 +16,9 @@ class HistoryRepository(private val local: WeatherHistoryDataSource) {
     fun fetchAll(): WeatherLocationsListFlow = flow {
         emit(Resource.loading())
         try {
-            local.fetchAll().collect { emit(Resource.success(it)) }
+            local.fetchAll().collect {
+                emit(Resource.success(it))
+            }
         } catch (e: HistoryFetchException) {
             emit(Resource.error(e))
         } catch (e: Exception) {

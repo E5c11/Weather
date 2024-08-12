@@ -1,15 +1,11 @@
 package com.demo.weather.map.ui
 
-import android.Manifest
 import android.annotation.SuppressLint
-import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.location.Geocoder
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.demo.weather.R
@@ -46,6 +42,8 @@ class MapFragment: Fragment(R.layout.map_fragment), OnMapReadyCallback {
         binding.map.getMapAsync(this)
 
         geocoder = Geocoder(requireContext())
+
+        locationViewModel.obtainLocation()
 
         if (requireContext().hasLocationPermission()) getLocation()
     }
@@ -111,7 +109,7 @@ class MapFragment: Fragment(R.layout.map_fragment), OnMapReadyCallback {
     }
 
     private fun getLocation() {
-        locationViewModel.obtainLocation().collectIn(viewLifecycleOwner) { resource ->
+        locationViewModel.locationState.collectIn(this) { resource ->
             resource.data?.animateToLocation()
         }
     }

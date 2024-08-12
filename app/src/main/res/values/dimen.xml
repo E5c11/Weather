@@ -17,6 +17,8 @@
     <dimen name="card_width">328dp</dimen>
     <dimen name="card_radius">28dp</dimen>
 
+    <dimen name="overlay_component_height">24dp</dimen>
+
     <dimen name="list_item_height">44dp</dimen>
     <dimen name="list_icon_width">44dp</dimen>
     <dimen name="icon_width">100dp</dimen>

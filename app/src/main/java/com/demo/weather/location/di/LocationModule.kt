@@ -11,7 +11,6 @@ import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.Priority
 import com.demo.weather.location.service.LocationService
-import com.demo.weather.timer.Timer
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -25,10 +24,8 @@ object LocationModule {
     @Provides
     fun providesLocationDataSource(
         locationService: LocationService,
-        timer: Timer,
         dispatcherProvider: DispatcherProvider
-    ): LocationDataSource =
-        LocalLocationDataSource(locationService, timer, dispatcherProvider)
+    ): LocationDataSource = LocalLocationDataSource(locationService, dispatcherProvider)
 
     @Provides
     fun providesLocationService(

@@ -1,8 +1,6 @@
 package com.demo.weather.weather.di
 
 import com.demo.weather.history.HistoryRepository
-import com.demo.weather.timer.DefaultTimer
-import com.demo.weather.timer.Timer
 import com.demo.weather.weather.WeatherRepository
 import com.demo.weather.weather.helper.WeatherConstants.BASE_URL
 import com.demo.weather.weather.io.RemoteWeatherDataSource
@@ -43,7 +41,4 @@ object WeatherModule {
     @Provides
     fun providesWeatherRepository(dataSource: WeatherDataSource) =
         WeatherRepository(dataSource)
-
-    @Provides
-    fun providesTimer(): Timer = DefaultTimer()
 }
