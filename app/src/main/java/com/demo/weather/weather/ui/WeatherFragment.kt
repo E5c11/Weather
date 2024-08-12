@@ -94,7 +94,6 @@ class WeatherFragment: Fragment(R.layout.weather_fragment) {
             this,
             binding,
             updateLocation = {
-                println("Location updated: $it")
                 weatherViewModel.getWeather(it)
             }
         ).also { component ->
