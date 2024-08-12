@@ -2,6 +2,7 @@ package com.demo.weather.location.service
 
 import android.annotation.SuppressLint
 import android.os.Handler
+import android.os.HandlerThread
 import android.os.Looper
 import android.util.Log
 import com.demo.weather.location.data.Location
@@ -12,20 +13,18 @@ import com.google.android.gms.location.LocationResult
 import kotlinx.coroutines.android.asCoroutineDispatcher
 import kotlinx.coroutines.tasks.await
 
-class
-GoogleLocationService(
+class GoogleLocationService(
     private val locationClient: FusedLocationProviderClient,
     private val locationRequest: LocationRequest
 ) : LocationService {
+    private lateinit var handlerThread: HandlerThread
     private lateinit var dispatcherHandler: Handler
     private lateinit var locationCallback: LocationCallback
     private var minAccuracy = 100F
 
     override fun setup() {
-        Looper.prepare()
-        dispatcherHandler = Handler(Looper.myLooper()!!).also {
-            it.asCoroutineDispatcher()
-        }
+        handlerThread = HandlerThread("LocationServiceThread").apply { start() }
+        dispatcherHandler = Handler(handlerThread.looper)
     }
 
     @SuppressLint("MissingPermission")
@@ -43,13 +42,12 @@ GoogleLocationService(
                 locationCallback,
                 dispatcherHandler.looper
             )
-            Looper.loop()
         }
     }
 
     override fun stopUpdates() {
         locationClient.removeLocationUpdates(locationCallback)
-        dispatcherHandler.looper.quit()
+        handlerThread.quitSafely()
     }
 
     @SuppressLint("MissingPermission")

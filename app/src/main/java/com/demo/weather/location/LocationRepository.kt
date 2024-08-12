@@ -24,6 +24,7 @@ class LocationRepository @Inject constructor(private val dataSource: LocationDat
         } catch (e: ActionableException) {
             emit(Resource.error(error = e))
         } catch (e: Exception) {
+            println(e.message)
             emit(Resource.error(LocationFetchException(error = e)))
         }
     }
