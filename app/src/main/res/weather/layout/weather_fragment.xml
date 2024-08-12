@@ -106,17 +106,6 @@
         app:layout_constraintEnd_toEndOf="@id/end_guideline"
         tools:visibility="visible"/>
 
-    <ProgressBar
-        android:id="@+id/progress_bar"
-        android:layout_width="@dimen/icon_width"
-        android:layout_height="@dimen/icon_width"
-        android:visibility="visible"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        tools:visibility="gone"/>
-
     <View
         android:id="@+id/current_weather_sep"
         android:layout_width="0dp"
@@ -140,5 +129,14 @@
         app:layout_constraintEnd_toEndOf="@id/end_guideline"
         app:layout_constraintBottom_toBottomOf="@id/bottom_guideline"
         tools:visibility="visible"/>
+
+    <include
+        android:id="@+id/loading_component"
+        layout="@layout/loading_component"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
 </androidx.constraintlayout.motion.widget.MotionLayout>

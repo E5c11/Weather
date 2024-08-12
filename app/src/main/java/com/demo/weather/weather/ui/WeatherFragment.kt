@@ -1,26 +1,29 @@
 package com.demo.weather.weather.ui
 
 import android.Manifest
-import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.content.IntentSender
-import android.location.LocationManager
-import android.os.Build
 import android.os.Bundle
 import android.os.Parcelable
-import android.util.Log
 import android.view.View
 import androidx.activity.result.IntentSenderRequest
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.demo.weather.R
+import com.demo.weather.common.helper.Constant.ERROR
+import com.demo.weather.common.helper.Constant.LOADING
+import com.demo.weather.common.helper.Resource
+import com.demo.weather.common.helper.StringFlow
 import com.demo.weather.common.helper.collectIn
 import com.demo.weather.common.helper.hasLocationPermission
+import com.demo.weather.common.helper.isError
+import com.demo.weather.common.helper.isLoading
+import com.demo.weather.common.helper.isSuccess
 import com.demo.weather.common.io.ActionableException
+import com.demo.weather.common.ui.components.LoadingComponent
 import com.demo.weather.databinding.WeatherFragmentBinding
 import com.demo.weather.location.viewmodel.LocationViewModel
 import com.demo.weather.weather.component.CurrentWeatherComponent
@@ -32,9 +35,10 @@ import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.LocationSettingsRequest
 import com.google.android.gms.location.Priority
-import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
+import kotlinx.coroutines.flow.filter
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.merge
 
 const val MOTION_PROGRESS = "motion_progress"
 const val RECYCLER_STATE = "recycler_state"
@@ -43,9 +47,6 @@ const val RECYCLER_STATE = "recycler_state"
 class WeatherFragment: Fragment(R.layout.weather_fragment) {
 
     private lateinit var binding: WeatherFragmentBinding
-
-    private lateinit var currentWeatherComponent: CurrentWeatherComponent
-    private lateinit var hourlyComponent: HourlyComponent
 
     private val locationViewModel: LocationViewModel by viewModels()
     private val weatherViewModel: WeatherViewModel by viewModels()
@@ -63,37 +64,63 @@ class WeatherFragment: Fragment(R.layout.weather_fragment) {
 
         requireContext().isLocationEnabled()
 
-        hourlyComponent = HourlyComponent(
-            this, weatherViewModel, binding,
-            updateCurrentWeather = {
-                currentWeatherComponent.updateWeather(it)
-
-            },
-            displayError = {
-                it.showError()
-            }
-        )
-
-        currentWeatherComponent = CurrentWeatherComponent(
-            this, locationViewModel, binding,
-            updateCurrentLocation = {
-                hourlyComponent.getWeatherWithLocation(it)
-            },
-            displayError = {
-                it.showError()
-            }
-        )
         requestLocation()
+        setupComponents()
+        transitionalStateComponents()
+    }
+
+    private fun transitionalStateComponents() {
+        val errorState: StringFlow = merge(
+            weatherViewModel.weatherState.map { Resource(it.status, ERROR, it.error) },
+            locationViewModel.locationState.map { Resource(it.status, ERROR, it.error) }
+        ).filter { it.isError() }
+
+        val loadingState: StringFlow = merge(
+            weatherViewModel.weatherState.map { Resource(it.status, LOADING, it.error) }
+        )
+
+        LoadingComponent(
+            this,
+            binding.loadingComponent
+        ).collect(loadingState.map { it.isLoading() }, loadingState)
+
+        errorState.collectIn(this) {
+            it.error?.showError()
+        }
+    }
+
+    private fun setupComponents() {
+        HourlyComponent(
+            this,
+            binding,
+            updateLocation = {
+                weatherViewModel.getWeather(it)
+            }
+        ).also { component ->
+            component.collectLocation(locationViewModel.locationState.map { Resource.success(it.data) })
+            component.collect(
+                weatherViewModel.weatherState.map { it.isSuccess() },
+                weatherViewModel.weatherState
+            )
+        }
+
+        CurrentWeatherComponent(
+            this,
+            binding
+        ).collect(
+            weatherViewModel.weatherState.map { it.isSuccess() },
+            weatherViewModel.weatherState.map { Resource.success(it.data!![0]) }
+        )
     }
 
     private fun requestLocation() {
-        if (requireContext().hasLocationPermission()) currentWeatherComponent.obtainLocation()
+        if (requireContext().hasLocationPermission()) locationViewModel.obtainLocation()
         else askPermission()
     }
 
     private val requestPermission =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
-            if (isGranted) currentWeatherComponent.obtainLocation()
+            if (isGranted) locationViewModel.obtainLocation()
             else LocationPermissionDeniedException().showError()
         }
 
@@ -132,9 +159,6 @@ class WeatherFragment: Fragment(R.layout.weather_fragment) {
         else ActionableException("Please make sure location services are enabled").showError()
     }
 
-    private fun ActionableException.showError() =
-        findNavController().navigate(WeatherFragmentDirections.actionGlobalErrorFragment(this))
-
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         val layoutManager = binding.listview.layoutManager
@@ -142,5 +166,8 @@ class WeatherFragment: Fragment(R.layout.weather_fragment) {
         outState.putParcelable(RECYCLER_STATE, state)
         outState.putFloat(MOTION_PROGRESS, binding.root.progress)
     }
+
+    private fun ActionableException.showError() =
+        findNavController().navigate(WeatherFragmentDirections.actionGlobalErrorFragment(this))
 
 }
