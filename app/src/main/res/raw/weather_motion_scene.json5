@@ -1,0 +1,135 @@
+{
+  ConstraintSets: {
+    start: {
+      location: {
+        alpha: 1,
+        width: 'wrap',
+        height: 'wrap',
+        verticalChainStyle: 'packed',
+        top: ['parent', 'top'],
+        start: ['parent', 'start'],
+        end: ['parent', 'end'],
+        bottom: ['icon', 'top']
+      },
+      icon: {
+        width: 96,
+        height: 96,
+        top: ['location', 'bottom'],
+        start: ['parent', 'start'],
+        end: ['parent', 'end'],
+        bottom: ['temperature', 'top']
+      },
+      temperature: {
+        width: 96,
+        height: 96,
+        top: ['icon', 'bottom'],
+        start: ['parent', 'start'],
+        end: ['parent', 'end'],
+        bottom: ['suggestion', 'top'],
+        custom: {
+          textSize: 70
+        }
+      },
+      suggestion: {
+        width: 'wrap',
+        height: 'wrap',
+        top: ['suggestion_image', 'top'],
+        start: ['parent', 'start'],
+        end: ['suggestion_image', 'start'],
+        bottom: ['suggestion_image', 'bottom']
+      },
+      suggestion_image: {
+        width: 48,
+        height: 48,
+        top: ['temperature', 'bottom'],
+        bottom: ['divider', 'bottom'],
+        start: ['suggestion', 'end'],
+        end: ['parent', 'end']
+      },
+      divider: {
+        width: 'spread',
+        height: 1,
+        top: ['suggestion', 'bottom'],
+        start: ['parent', 'start'],
+        end: ['parent', 'end'],
+        bottom: ['listview', 'top']
+      },
+      progress_bar: {
+        width: 96,
+        height: 96,
+        top: ['parent', 'top'],
+        bottom: ['parent', 'bottom'],
+        start: ['parent', 'start'],
+        end: ['parent', 'end']
+      },
+      listview: {
+        width: 'spread',
+        height: 'spread',
+        marginTop: 16,
+        top: ['divider', 'bottom'],
+        start: ['parent', 'start'],
+        end: ['parent', 'end'],
+        bottom: ['parent', 'bottom']
+      }
+    },
+    end: {
+      location: {
+        alpha: 0
+      },
+      temperature: {
+        width: 48,
+        height: 48,
+        top: ['parent', 'bottom'],
+        start: ['parent', 'start'],
+        end: ['icon', 'start'],
+        custom: {
+          textSize: 35
+        }
+      },
+      icon: {
+        width: 48,
+        height: 48,
+        start: ['temperature', 'end'],
+        end: ['suggestion', 'start'],
+        top: ['temperature', 'top'],
+        bottom: ['temperature', 'bottom']
+      },
+      suggestion: {
+        width: 'wrap',
+        height: 'wrap',
+        visibility: 'gone',
+        top: ['temperature', 'top'],
+        bottom: ['temperature', 'bottom'],
+        start: ['icon', 'end'],
+        end: ['parent', 'end']
+      },
+      suggestion_image: {
+        width: 48,
+        height: 48,
+        visibility: 'gone',
+        top: ['temperature', 'bottom'],
+        bottom: ['divider', 'bottom'],
+        start: ['suggestion', 'end'],
+        end: ['parent', 'end']
+      },
+      divider: {
+        width: 'spread',
+        height: 1,
+        top: ['suggestion', 'bottom'],
+        start: ['parent', 'start'],
+        end: ['parent', 'end'],
+        bottom: ['listview', 'top']
+      },
+      listview: {
+        width: 'spread',
+        height: 'spread',
+        marginTop: 16,
+        top: ['divider', 'bottom'],
+        start: ['parent', 'start'],
+        end: ['parent', 'end'],
+        bottom: ['parent', 'bottom'],
+        translationY: 250
+      }
+    }
+  }
+}
