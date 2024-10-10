@@ -1,7 +1,5 @@
 package com.demo.weather.weather.ui
 
-import androidx.compose.animation.AnimatedContentTransitionScope.SlideDirection.Companion.End
-import androidx.compose.animation.AnimatedContentTransitionScope.SlideDirection.Companion.Start
 import androidx.compose.animation.core.DecayAnimationSpec
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.rememberSplineBasedDecay
@@ -25,13 +23,12 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.layout
+import androidx.compose.ui.layout.layoutId
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
@@ -42,7 +39,6 @@ import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ExperimentalMotionApi
 import androidx.constraintlayout.compose.MotionLayout
 import androidx.constraintlayout.compose.MotionScene
-import androidx.constraintlayout.compose.layoutId
 import coil.compose.AsyncImage
 import com.demo.weather.R
 import com.demo.weather.location.viewmodel.LocationViewModel
