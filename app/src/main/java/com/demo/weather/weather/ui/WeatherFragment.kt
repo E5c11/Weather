@@ -5,7 +5,6 @@ import android.app.Activity
 import android.content.Context
 import android.content.IntentSender
 import android.os.Bundle
-import android.os.Parcelable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,7 +14,6 @@ import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.demo.weather.R
 import com.demo.weather.common.helper.Constant.ERROR
 import com.demo.weather.common.helper.Constant.LOADING
 import com.demo.weather.common.helper.Resource
@@ -85,7 +83,7 @@ class WeatherFragment: Fragment(
 
         val composeView = ComposeView(requireContext()).apply {
             setContent {
-                WeatherComposable(locationViewModel, weatherViewModel)
+                WeatherScreen(locationViewModel, weatherViewModel)
             }
         }
         return composeView
