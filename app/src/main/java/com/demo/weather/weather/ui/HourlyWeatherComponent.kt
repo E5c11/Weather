@@ -35,7 +35,7 @@ fun HourlyWeatherComponent(
         LazyColumn(
             modifier = Modifier
                 .layoutId("listview")
-                .padding(top = 16.dp, start = 16.dp, end = 16.dp)
+                .padding(top = 16.dp)
         ) {
             val weatherList: List<Weather> = currentWeather ?: emptyList()
             items(items = weatherList) { weather ->
@@ -64,7 +64,7 @@ fun FiveDayItem(weather: Weather?) {
 
         Text(
             text = weather?.time.toString(),
-            fontSize = 18.sp,
+            fontSize = 14.sp,
             color = Color.White,
             modifier = Modifier
                 .padding(end = 16.dp)
@@ -73,7 +73,7 @@ fun FiveDayItem(weather: Weather?) {
         Spacer(modifier = Modifier.weight(1f))
         Text(
             text = stringResource(R.string.day_weather, weather?.temp.toString(), weather?.wind.toString()),
-            fontSize = 16.sp,
+            fontSize = 14.sp,
             color = Color.White
         )
     }

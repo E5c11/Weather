@@ -16,7 +16,7 @@ class NewWeatherFragment: Fragment() {
     ): View {
         val composeView = ComposeView(requireContext()).apply {
             setContent {
-//                WeatherComposable()
+//                WeatherScreen()
             }
         }
         return composeView

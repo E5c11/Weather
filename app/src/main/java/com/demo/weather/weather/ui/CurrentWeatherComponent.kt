@@ -4,13 +4,17 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.layoutId
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.demo.weather.R
@@ -22,7 +26,9 @@ import com.google.android.gms.maps.model.LatLng
 fun CurrentWeatherComponent(
     currentWeather: Weather?
 ) {
-    Column {
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+    ) {
         Image(
             painter = painterResource(id = currentWeather?.icon ?: R.drawable.cloud),
             contentDescription = "Icon",
@@ -37,20 +43,25 @@ fun CurrentWeatherComponent(
             color = Color.White
         )
 
-        Text(
-            text = "Best for:",
-            fontSize = 20.sp,
-            modifier = Modifier
-                .layoutId("suggestion"),
-            color = Color.White
-        )
+        Row(
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Text(
+                text = "Best for:",
+                fontSize = 20.sp,
+                modifier = Modifier
+                    .layoutId("suggestion"),
+                color = Color.White
+            )
 
-        AsyncImage(
-            model = "$MATERIAL_ICON_URL${currentWeather?.suggestion}",
-            contentDescription = "Suggestion Image",
-            modifier = Modifier
-                .layoutId("suggestion_image")
-        )
+            AsyncImage(
+                model = "$MATERIAL_ICON_URL${currentWeather?.suggestion}",
+                contentDescription = "Suggestion Image",
+                modifier = Modifier
+                    .size(32.dp)
+                    .layoutId("suggestion_image")
+            )
+        }
     }
 }
 
