@@ -86,6 +86,7 @@ fun Weather(
 ) {
     Column(
         modifier = Modifier
+            .fillMaxWidth()
             .background(colorResource(R.color.blue_02))
             .padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -97,8 +98,7 @@ fun Weather(
         HorizontalDivider(
             modifier = Modifier
                 .fillMaxWidth(0.8f)
-                .padding(16.dp)
-                .layoutId("divider"),
+                .padding(16.dp),
             thickness = 1.dp
         )
 

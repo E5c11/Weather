@@ -5,7 +5,9 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -36,12 +38,15 @@ fun CurrentWeatherComponent(
                 .layoutId("icon")
         )
 
-        Text(
-            text = currentWeather?.temp.toString(),
-            fontSize = 72.sp,
-            modifier = Modifier.layoutId("temperature"),
-            color = Color.White
-        )
+        if (currentWeather?.temp == null) {
+            CircularProgressIndicator(modifier = Modifier.padding(16.dp))
+        } else {
+            Text(
+                text = currentWeather.temp.toString(),
+                fontSize = 72.sp,
+                color = Color.White
+            )
+        }
 
         Row(
             verticalAlignment = Alignment.CenterVertically

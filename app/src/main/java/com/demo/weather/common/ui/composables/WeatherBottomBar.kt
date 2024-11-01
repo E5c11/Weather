@@ -16,8 +16,8 @@ import com.demo.weather.weather.ui.WeatherScreenRoute
 @Composable
 fun WeatherBottomBar(navController: NavController, selectedItem: Any, onItemSelected: (Any) -> Unit) {
     val items = listOf(
-        WeatherNavItem(WeatherScreenRoute, R.string.home, R.drawable.home_24),
         WeatherNavItem(HistoryScreenRoute, R.string.recent, R.drawable.recent_24),
+        WeatherNavItem(WeatherScreenRoute, R.string.home, R.drawable.home_24),
         WeatherNavItem(MapScreenRoute, R.string.map, R.drawable.map_24)
     )
 

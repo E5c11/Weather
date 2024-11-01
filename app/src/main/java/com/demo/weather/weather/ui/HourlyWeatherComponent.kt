@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -31,12 +32,11 @@ import com.google.android.gms.maps.model.LatLng
 fun HourlyWeatherComponent(
     currentWeather: List<Weather>?
 ) {
-    Column {
-        LazyColumn(
-            modifier = Modifier
-                .layoutId("listview")
-                .padding(top = 16.dp)
-        ) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
+        LazyColumn {
             val weatherList: List<Weather> = currentWeather ?: emptyList()
             items(items = weatherList) { weather ->
                 FiveDayItem(weather)
