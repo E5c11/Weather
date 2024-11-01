@@ -1,23 +1,30 @@
 package com.demo.weather.weather.ui
 
+import android.Manifest
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.paint
 import androidx.compose.ui.layout.layoutId
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleEventObserver
+import androidx.lifecycle.compose.LocalLifecycleOwner
 import com.demo.weather.R
+import com.demo.weather.common.helper.collectAsEffect
 import com.demo.weather.location.viewmodel.LocationViewModel
 import com.demo.weather.weather.data.weather.Weather
 import com.demo.weather.weather.viewmodel.WeatherViewModel
@@ -33,12 +40,36 @@ fun WeatherScreen(
     val weatherState = weatherViewModel.weatherState.collectAsState()
     val currentWeather = weatherState.value.data?.firstOrNull()
 
-    LaunchedEffect(Unit) {
-        locationViewModel.locationState.collect {
-           it.data?.let { location ->
-               weatherViewModel.getWeather(location)
-               cancel()
-           }
+    val context = LocalContext.current
+    val lifecycleOwner = LocalLifecycleOwner.current
+
+    val permissionLauncher = rememberLauncherForActivityResult(
+        ActivityResultContracts.RequestPermission()
+    ) { isGranted: Boolean ->
+        if (isGranted) {
+            locationViewModel.obtainLocation()
+        } else {
+//            updateError(SafetyObservationUiErrors.PERMISSION_DENIED)
+        }
+    }
+
+    DisposableEffect(lifecycleOwner) {
+        val observer = LifecycleEventObserver { _, event ->
+            if (event == Lifecycle.Event.ON_CREATE) {
+                permissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
+            }
+        }
+
+        lifecycleOwner.lifecycle.addObserver(observer)
+
+        onDispose {
+            lifecycleOwner.lifecycle.removeObserver(observer)
+        }
+    }
+
+    locationViewModel.locationState.collectAsEffect {
+        it.data?.let { location ->
+            weatherViewModel.getWeather(location)
         }
     }
 

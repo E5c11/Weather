@@ -5,6 +5,7 @@ import android.app.Activity
 import android.content.Context
 import android.content.IntentSender
 import android.os.Bundle
+import android.os.Parcelable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,6 +15,7 @@ import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.demo.weather.R
 import com.demo.weather.common.helper.Constant.ERROR
 import com.demo.weather.common.helper.Constant.LOADING
 import com.demo.weather.common.helper.Resource
@@ -46,7 +48,7 @@ const val RECYCLER_STATE = "recycler_state"
 
 @AndroidEntryPoint
 class WeatherFragment: Fragment(
-//    R.layout.weather_fragment
+    R.layout.weather_fragment
 ) {
 
     private lateinit var binding: WeatherFragmentBinding
@@ -54,39 +56,22 @@ class WeatherFragment: Fragment(
     private val locationViewModel: LocationViewModel by viewModels()
     private val weatherViewModel: WeatherViewModel by viewModels()
 
-//    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-//        super.onViewCreated(view, savedInstanceState)
-//        binding = WeatherFragmentBinding.bind(view)
-//
-//        if (savedInstanceState != null) {
-//            val state = savedInstanceState.getParcelable<Parcelable>(RECYCLER_STATE)
-//            binding.listview.layoutManager?.onRestoreInstanceState(state)
-//            val progress = savedInstanceState.getFloat(MOTION_PROGRESS)
-//            binding.root.progress = progress
-//        }
-//
-//        requireContext().isLocationEnabled()
-//
-//        requestLocation()
-//        setupComponents()
-//        transitionalStateComponents()
-//    }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding = WeatherFragmentBinding.bind(view)
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
+        if (savedInstanceState != null) {
+            val state = savedInstanceState.getParcelable<Parcelable>(RECYCLER_STATE)
+            binding.listview.layoutManager?.onRestoreInstanceState(state)
+            val progress = savedInstanceState.getFloat(MOTION_PROGRESS)
+            binding.root.progress = progress
+        }
+
         requireContext().isLocationEnabled()
 
         requestLocation()
-
-        val composeView = ComposeView(requireContext()).apply {
-            setContent {
-                WeatherScreen()
-            }
-        }
-        return composeView
+        setupComponents()
+        transitionalStateComponents()
     }
 
     private fun transitionalStateComponents() {
