@@ -16,17 +16,19 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.demo.weather.R
 import com.demo.weather.location.viewmodel.LocationViewModel
 import com.demo.weather.weather.data.weather.Weather
 import com.demo.weather.weather.viewmodel.WeatherViewModel
 import com.google.android.gms.maps.model.LatLng
 import kotlinx.coroutines.cancel
+import kotlinx.serialization.Serializable
 
 @Composable
 fun WeatherScreen(
-    locationViewModel: LocationViewModel,
-    weatherViewModel: WeatherViewModel
+    locationViewModel: LocationViewModel = hiltViewModel(),
+    weatherViewModel: WeatherViewModel = hiltViewModel()
 ) {
     val weatherState = weatherViewModel.weatherState.collectAsState()
     val currentWeather = weatherState.value.data?.firstOrNull()
@@ -104,3 +106,6 @@ fun PreviewWeatherComposable() {
         )
     )
 }
+
+@Serializable
+object WeatherScreenRoute

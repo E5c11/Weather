@@ -83,7 +83,7 @@ class WeatherFragment: Fragment(
 
         val composeView = ComposeView(requireContext()).apply {
             setContent {
-                WeatherScreen(locationViewModel, weatherViewModel)
+                WeatherScreen()
             }
         }
         return composeView
