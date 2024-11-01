@@ -17,8 +17,10 @@ object Dimens {
     val textSizeMini = 12.sp
     val textSizeSmall = 14.sp
     val textSizeMedium = 16.sp
+    val textSizeMLarge = 18.sp
     val textSizeLarge = 20.sp
     val textSizeXLarge = 24.sp
+    val textSizeXXLarge = 28.sp
     val textSizeMega = 72.sp
 
     val checkboxHeight = 24.dp

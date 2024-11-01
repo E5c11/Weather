@@ -59,6 +59,7 @@ fun WeatherTheme(
 
     MaterialTheme(
         colorScheme = colorScheme,
+        typography = customTypography,
         content = content
     )
 }
