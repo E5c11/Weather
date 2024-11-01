@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
@@ -25,6 +26,7 @@ import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import com.demo.weather.R
 import com.demo.weather.common.helper.collectAsEffect
+import com.demo.weather.common.resources.Dimens
 import com.demo.weather.location.viewmodel.LocationViewModel
 import com.demo.weather.weather.data.weather.Weather
 import com.demo.weather.weather.viewmodel.WeatherViewModel
@@ -87,8 +89,8 @@ fun Weather(
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .background(colorResource(R.color.blue_02))
-            .padding(16.dp),
+            .background(MaterialTheme.colorScheme.secondary)
+            .padding(Dimens.spacingMedium),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         CurrentWeatherComponent(
@@ -97,9 +99,9 @@ fun Weather(
 
         HorizontalDivider(
             modifier = Modifier
-                .fillMaxWidth(0.8f)
-                .padding(16.dp),
-            thickness = 1.dp
+                .fillMaxWidth(Dimens.dividerWidth)
+                .padding(Dimens.spacingMedium),
+            thickness = Dimens.dividerThickness
         )
 
         HourlyWeatherComponent(

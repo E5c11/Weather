@@ -9,6 +9,7 @@
 
     <string name="weather_error_title">Weather not found</string>
     <string name="weather_error">The data seems to be missing, please try again later</string>
+    <string name="weather_best_for">Best for: </string>
 
     <string name="stations_error_title">Stations not found</string>
     <string name="history_fetch_error_title">History Fetch Error</string>

@@ -19,6 +19,7 @@ object Dimens {
     val textSizeMedium = 16.sp
     val textSizeLarge = 20.sp
     val textSizeXLarge = 24.sp
+    val textSizeMega = 72.sp
 
     val checkboxHeight = 24.dp
 
@@ -34,4 +35,9 @@ object Dimens {
     val textFieldMin = 48.dp
     val textFieldMax = 128.dp
     val textFieldHeight = 64.dp
+
+    val imageSizeMedium = 32.dp
+    val imageSizeLarge = 40.dp
+
+    val columnItemHeightMedium = 56.dp
 }

@@ -15,11 +15,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.layoutId
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.demo.weather.R
+import com.demo.weather.common.resources.Dimens
 import com.demo.weather.weather.data.weather.Weather
 import com.demo.weather.weather.helper.WeatherConstants.MATERIAL_ICON_URL
 import com.google.android.gms.maps.model.LatLng
@@ -34,16 +36,14 @@ fun CurrentWeatherComponent(
         Image(
             painter = painterResource(id = currentWeather?.icon ?: R.drawable.cloud),
             contentDescription = "Icon",
-            modifier = Modifier
-                .layoutId("icon")
         )
 
         if (currentWeather?.temp == null) {
-            CircularProgressIndicator(modifier = Modifier.padding(16.dp))
+            CircularProgressIndicator(modifier = Modifier.padding(Dimens.spacingMedium))
         } else {
             Text(
                 text = currentWeather.temp.toString(),
-                fontSize = 72.sp,
+                fontSize = Dimens.textSizeMega,
                 color = Color.White
             )
         }
@@ -52,10 +52,8 @@ fun CurrentWeatherComponent(
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
-                text = "Best for:",
-                fontSize = 20.sp,
-                modifier = Modifier
-                    .layoutId("suggestion"),
+                text = stringResource(R.string.weather_best_for),
+                fontSize = Dimens.textSizeLarge,
                 color = Color.White
             )
 
@@ -63,8 +61,7 @@ fun CurrentWeatherComponent(
                 model = "$MATERIAL_ICON_URL${currentWeather?.suggestion}",
                 contentDescription = "Suggestion Image",
                 modifier = Modifier
-                    .size(32.dp)
-                    .layoutId("suggestion_image")
+                    .size(Dimens.imageSizeMedium)
             )
         }
     }
