@@ -30,39 +30,45 @@ import com.google.android.gms.maps.model.LatLng
 fun CurrentWeatherComponent(
     currentWeather: Weather?
 ) {
-    Column(
-        horizontalAlignment = Alignment.CenterHorizontally,
-    ) {
-        Image(
-            painter = painterResource(id = currentWeather?.icon ?: R.drawable.cloud),
-            contentDescription = "Icon",
-        )
+    if (currentWeather?.temp == null) {
+        CircularProgressIndicator(modifier = Modifier.padding(Dimens.spacingMedium))
+    } else {
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+        ) {
+            Text(
+                text = currentWeather.station,
+                fontSize = Dimens.textSizeLarge,
+                color = Color.White,
+                modifier = Modifier.padding(Dimens.spacingMedium)
+            )
+            Image(
+                painter = painterResource(id = currentWeather.icon ?: R.drawable.cloud),
+                contentDescription = "Icon",
+            )
 
-        if (currentWeather?.temp == null) {
-            CircularProgressIndicator(modifier = Modifier.padding(Dimens.spacingMedium))
-        } else {
             Text(
                 text = currentWeather.temp.toString(),
                 fontSize = Dimens.textSizeMega,
                 color = Color.White
             )
-        }
 
-        Row(
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Text(
-                text = stringResource(R.string.weather_best_for),
-                fontSize = Dimens.textSizeLarge,
-                color = Color.White
-            )
+            Row(
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text(
+                    text = stringResource(R.string.weather_best_for),
+                    fontSize = Dimens.textSizeLarge,
+                    color = Color.White
+                )
 
-            AsyncImage(
-                model = "$MATERIAL_ICON_URL${currentWeather?.suggestion}",
-                contentDescription = "Suggestion Image",
-                modifier = Modifier
-                    .size(Dimens.imageSizeMedium)
-            )
+                AsyncImage(
+                    model = "$MATERIAL_ICON_URL${currentWeather.suggestion}",
+                    contentDescription = "Suggestion Image",
+                    modifier = Modifier
+                        .size(Dimens.imageSizeMedium)
+                )
+            }
         }
     }
 }
