@@ -1,5 +1,6 @@
 package com.demo.weather.map.ui
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Canvas
@@ -37,6 +38,7 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import kotlinx.serialization.Serializable
 
+@SuppressLint("MissingPermission")
 @Composable
 fun MapScreen(
     locationViewModel: LocationViewModel = hiltViewModel(),
