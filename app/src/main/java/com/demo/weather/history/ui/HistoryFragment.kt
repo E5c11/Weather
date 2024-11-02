@@ -1,13 +1,11 @@
 package com.demo.weather.history.ui
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.demo.weather.R
-import com.demo.weather.common.helper.Resource
 import com.demo.weather.common.helper.collectIn
 import com.demo.weather.common.helper.fadeTo
 import com.demo.weather.databinding.HistoryFragmentBinding
@@ -32,11 +30,16 @@ class HistoryFragment: Fragment(R.layout.history_fragment) {
             recyclerView.adapter = historyAdapter
             recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
-            viewModel.getRecentLocationsWeather().collectIn(viewLifecycleOwner) {
-                emptyText.fadeTo(Resource.Status.LOADING == it.status || Resource.Status.ERROR == it.status)
-                recyclerView.fadeTo(Resource.Status.SUCCESS == it.status)
-                progressBar.fadeTo(Resource.Status.LOADING == it.status)
-                historyAdapter.submitList(it.data)
+            viewModel.getRecentLocationsWeather()
+
+            viewModel.state.collectIn(viewLifecycleOwner) {
+                progressBar.fadeTo(it == null)
+                it?.let {
+                    emptyText.fadeTo(it.isEmpty())
+                    if (it.isNotEmpty()) {
+                        historyAdapter.submitList(it)
+                    }
+                }
             }
         }
     }

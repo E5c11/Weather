@@ -42,7 +42,7 @@ val customTypography = Typography(
     ),
     bodyMedium = TextStyle(
         fontFamily = sourceSansPro,
-        fontWeight = FontWeight.Light,
+        fontWeight = FontWeight.Normal,
         fontSize = Dimens.textSizeSmall
     ),
     bodySmall = TextStyle(
