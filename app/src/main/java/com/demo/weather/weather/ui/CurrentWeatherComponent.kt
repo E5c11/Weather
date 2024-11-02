@@ -22,6 +22,7 @@ import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.demo.weather.R
 import com.demo.weather.common.resources.Dimens
+import com.demo.weather.common.ui.composables.TitleText
 import com.demo.weather.weather.data.weather.Weather
 import com.demo.weather.weather.helper.WeatherConstants.MATERIAL_ICON_URL
 import com.google.android.gms.maps.model.LatLng
@@ -36,9 +37,8 @@ fun CurrentWeatherComponent(
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            Text(
+            TitleText(
                 text = currentWeather.station,
-                fontSize = Dimens.textSizeLarge,
                 color = Color.White,
                 modifier = Modifier.padding(Dimens.spacingMedium)
             )
@@ -56,9 +56,8 @@ fun CurrentWeatherComponent(
             Row(
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Text(
+                TitleText(
                     text = stringResource(R.string.weather_best_for),
-                    fontSize = Dimens.textSizeLarge,
                     color = Color.White
                 )
 
