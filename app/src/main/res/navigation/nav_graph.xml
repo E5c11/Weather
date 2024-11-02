@@ -26,6 +26,9 @@
             app:destination="@id/historyFragment"
             app:popUpTo="@id/historyFragment"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_weatherFragment_to_newWeatherFragment"
+            app:destination="@id/newWeatherFragment" />
     </fragment>
     <dialog
         android:id="@+id/errorFragment"
@@ -47,4 +50,8 @@
         android:id="@+id/historyFragment"
         android:name="com.demo.weather.history.ui.HistoryFragment"
         android:label="HistoryFragment" />
+    <fragment
+        android:id="@+id/newWeatherFragment"
+        android:name="com.demo.weather.weather.ui.NewWeatherFragment"
+        android:label="NewWeatherFragment" />
 </navigation>

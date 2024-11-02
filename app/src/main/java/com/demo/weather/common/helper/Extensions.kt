@@ -3,6 +3,11 @@ package com.demo.weather.common.helper
 import android.Manifest
 import android.content.Context
 import android.content.pm.PackageManager
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.State
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
@@ -10,9 +15,16 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.demo.weather.R
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.SharedFlow
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.coroutines.CoroutineContext
+import kotlin.coroutines.EmptyCoroutineContext
 
 fun <T> Flow<T>.collectIn(
     owner: LifecycleOwner,
@@ -119,3 +131,28 @@ fun String.toDayOfTheWeek(): String {
 }
 
 fun String.matchTime(): Boolean = this.toDateHour() == getDate().toDateHour()
+
+@Composable
+fun <T> Flow<T>.collectAsStateLatest(
+    initial: T
+): State<T> {
+    val state = remember { mutableStateOf(initial) }
+
+    LaunchedEffect(this) {
+        this@collectAsStateLatest.collectLatest {
+            state.value = it
+        }
+    }
+
+    return state
+}
+
+@Composable
+fun <T> Flow<T>.collectAsEffect(
+    context: CoroutineContext = EmptyCoroutineContext,
+    block: (T) -> Unit
+) {
+    LaunchedEffect(key1 = Unit) {
+        onEach(block).flowOn(context).launchIn(this)
+    }
+}
