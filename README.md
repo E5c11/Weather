@@ -20,10 +20,10 @@ Displays the current weather from local storage of all previously searched locat
 
 # Architecture
 
-In this project I have opted for a MVVM architecture with a repository pattern. This allows for a 
+In this project I have opted for a MVI architecture with a repository pattern. This allows for a 
 clear separation of concerns and allows for easy testing of the view models. The repository pattern 
 allows for a single source of truth for the data and allows for easy caching of data.
-I have used navigation components -> viewmodels -> usecases -> repository -> network/data source/services
+I have used navigation components/nav host with compose -> viewmodels -> usecases -> repository -> network/data source/services
 
 # Libraries
 
@@ -57,7 +57,5 @@ I have however used a component approach to separate ui logic and remove the com
 - Detailed attention to complex features and making them easy to understand and allow for 
   extensibility
 - Better use of resources
-- Migrate to Jetpack Compose
-- Migrate to version catalogs for all dependencies
 - Use conventions to handle plugins and dependencies
 - Kotlin docs to help with navigating the codebase
